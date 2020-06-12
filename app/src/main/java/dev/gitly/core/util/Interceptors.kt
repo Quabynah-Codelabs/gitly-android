@@ -21,7 +21,7 @@ class AuthInterceptor @Inject constructor(private val authPrefs: AuthPrefs) : In
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         request.apply {
-            // TODO: Add headers here
+            header("Accept: application/json")
         }
         return chain.proceed(request)
     }

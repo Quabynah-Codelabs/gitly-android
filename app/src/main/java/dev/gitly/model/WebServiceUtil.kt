@@ -19,6 +19,7 @@ import retrofit2.Retrofit
 @InstallIn(ActivityComponent::class)
 object WebServiceUtil {
     private const val BASE_URL = "https://api.github.com/"
+    private const val AUTH_BASE_URL = "https://github.com/"
 
     @Provides
     fun provideDefaultInterceptor(): HttpLoggingInterceptor =
@@ -28,7 +29,6 @@ object WebServiceUtil {
             }
         }).apply {
             setLevel(HttpLoggingInterceptor.Level.BASIC)
-            // redactHeader("Authorization")
         }
 
     @Provides
@@ -54,12 +54,23 @@ object WebServiceUtil {
     }.build()
 
     @Provides
-    fun provideWebService(
-        @AuthInterceptorOkHttpClient
+    fun provideDefaultWebService(
+        @DefaultInterceptorOkHttpClient
         client: OkHttpClient
     ): WebService = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(client)
+        .build()
+        .create(WebService::class.java)
+
+    @Provides
+    fun provideAuthWebService(
+        @AuthInterceptorOkHttpClient
+        client: OkHttpClient
+    ): WebService = Retrofit.Builder()
+        .baseUrl(AUTH_BASE_URL)
+        .client(client)
+//        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(WebService::class.java)
 
