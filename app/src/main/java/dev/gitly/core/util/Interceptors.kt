@@ -1,6 +1,7 @@
 package dev.gitly.core.util
 
 import dev.gitly.core.prefs.AuthPrefs
+import dev.gitly.debugger
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -8,22 +9,22 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class AuthInterceptorOkHttpClient
+annotation class AuthWebService
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class DefaultInterceptorOkHttpClient
+annotation class DefaultWebService
 
 /**
- * Authentication interceptor
+ * Application's WebService interceptor
  */
-class AuthInterceptor @Inject constructor(private val authPrefs: AuthPrefs) : Interceptor {
+class GitlyInterceptor @Inject constructor(private val authPrefs: AuthPrefs) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         request.apply {
-            header("Accept: application/json")
+            headers("Authorization: token ${authPrefs.token}")
+            headers("Accept: application/json")
         }
         return chain.proceed(request)
     }
-
 }

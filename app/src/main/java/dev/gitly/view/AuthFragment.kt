@@ -9,16 +9,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.BuildConfig
 import dev.gitly.R
 import dev.gitly.databinding.AuthFragmentBinding
+import dev.gitly.debugger
+import dev.gitly.model.DatabaseUtil
+import dev.gitly.model.WebServiceUtil
+import dev.gitly.viewmodel.AuthViewModel
+import dev.gitly.viewmodel.AuthViewModelFactory
+import dev.gitly.viewmodel.AuthViewModel_Factory
+import okhttp3.OkHttpClient
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
 
-    //    @Inject
-//    lateinit var authPrefs: AuthPrefs
+    private val viewModel: AuthViewModel by viewModels { AuthViewModelFactory(requireContext()) }
     private lateinit var binding: AuthFragmentBinding
 
     override fun onCreateView(
@@ -32,18 +41,24 @@ class AuthFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.run {
-        }
+    }
+
+    override fun onStart() {
+        super.onStart()
         login()
     }
 
     override fun onResume() {
         super.onResume()
         val data = requireActivity().intent?.data
-        if (data != null && data.toString().startsWith(BuildConfig.AUTH_CALLBACK))
-            Toast.makeText(requireContext(), "Yay!!!", Toast.LENGTH_SHORT).show()
-        val code = data?.getQueryParameter("code")
-
+        if (data != null && data.toString().startsWith(BuildConfig.AUTH_CALLBACK)) {
+            val code = data.getQueryParameter("code")
+            debugger("Code -> $code")
+            val authPrefs = DatabaseUtil.provideAuthPrefs(
+                requireContext()
+            )
+            viewModel.getAccessToken(code, authPrefs)
+        }
     }
 
     private fun login() {

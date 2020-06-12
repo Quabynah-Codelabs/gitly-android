@@ -11,8 +11,8 @@ import javax.inject.Inject
 class AuthPrefs @Inject constructor(context: Context) {
     private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }
 
-    val userId: String?
-        get() = prefs.getString("user_id", null)
+    val token: String?
+        get() = prefs.getString("token", null)
 
     fun logout() {
         prefs.edit {
@@ -21,9 +21,8 @@ class AuthPrefs @Inject constructor(context: Context) {
         }
     }
 
-    fun login(userId: String, token: String?) {
+    fun login(token: String?) {
         prefs.edit {
-            putString("user_id", userId)
             putString("token", token)
             apply()
         }
