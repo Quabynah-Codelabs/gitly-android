@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nav_dest_auth" type="id" />
+    <item name="nav_dest_home" type="id" />
+    <item name="nav_dest_repo" type="id" />
+</resources>

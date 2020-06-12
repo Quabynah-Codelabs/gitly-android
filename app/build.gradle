@@ -25,6 +25,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
+        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
+        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
     }
 
     signingConfigs {

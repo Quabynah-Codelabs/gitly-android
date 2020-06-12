@@ -1,9 +1,11 @@
 package dev.gitly.model
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.AuthInterceptor
 import dev.gitly.core.util.AuthInterceptorOkHttpClient
 import dev.gitly.core.util.DefaultInterceptorOkHttpClient
@@ -19,8 +21,8 @@ object WebServiceUtil {
     private const val BASE_URL = "https://api.github.com/"
 
     @Provides
-    fun provideAuthInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    fun provideDefaultInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 debugger(message)
             }
@@ -28,38 +30,37 @@ object WebServiceUtil {
             setLevel(HttpLoggingInterceptor.Level.BASIC)
             // redactHeader("Authorization")
         }
-    }
 
-    @AuthInterceptorOkHttpClient
     @Provides
-    fun provideAuthOkHttpClient(
-        logging: HttpLoggingInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder().apply {
-            addInterceptor(logging)
-        }.build()
-    }
+    fun provideAuthPrefs(context: Context): AuthPrefs = AuthPrefs(context)
+
+    @Provides
+    fun provideAuthInterceptor(prefs: AuthPrefs): AuthInterceptor = AuthInterceptor(prefs)
 
     @DefaultInterceptorOkHttpClient
     @Provides
     fun provideDefaultOkHttpClient(
+        logging: HttpLoggingInterceptor
+    ): OkHttpClient = OkHttpClient.Builder().apply {
+        addInterceptor(logging)
+    }.build()
+
+    @AuthInterceptorOkHttpClient
+    @Provides
+    fun provideAuthOkHttpClient(
         logging: AuthInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder().apply {
-            addInterceptor(logging)
-        }.build()
-    }
+    ): OkHttpClient = OkHttpClient.Builder().apply {
+        addInterceptor(logging)
+    }.build()
 
     @Provides
     fun provideWebService(
         @AuthInterceptorOkHttpClient
         client: OkHttpClient
-    ): WebService {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .build()
-            .create(WebService::class.java)
-    }
+    ): WebService = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .client(client)
+        .build()
+        .create(WebService::class.java)
 
 }

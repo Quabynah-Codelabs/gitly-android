@@ -1,4 +1,4 @@
-package dev.gitly.view
+package dev.gitly.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,8 @@ class AuthViewModel @Inject constructor(private val webService: WebService) : Vi
     fun login() {
         debugger("Logging in...")
         viewModelScope.launch {
-
+            val repos = webService.getReposAsync("fs-opensource").await()
+            debugger(repos)
         }
     }
 
