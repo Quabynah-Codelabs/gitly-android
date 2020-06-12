@@ -14,6 +14,7 @@ import dev.gitly.model.sources.remote.WebService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -60,6 +61,7 @@ object WebServiceUtil {
     ): WebService = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(client)
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(WebService::class.java)
 
@@ -70,7 +72,7 @@ object WebServiceUtil {
     ): WebService = Retrofit.Builder()
         .baseUrl(AUTH_BASE_URL)
         .client(client)
-//        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(WebService::class.java)
 
