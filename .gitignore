@@ -1,3 +1,7 @@
+# Node modules
+**/node_modules/
+**/gen/
+
 # Built application files
 *.apk
 *.ap_
@@ -13,8 +17,7 @@
 bin/
 gen/
 out/
-#  Uncomment the following line in case you need and you don't have the release build type files in your app
-# release/
+release/
 
 # Gradle files
 .gradle/
@@ -58,7 +61,7 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+google-services.json
 
 # Freeline
 freeline.py
