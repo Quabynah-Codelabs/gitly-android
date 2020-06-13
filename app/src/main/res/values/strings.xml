@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gitly</string>
+    <string name="login_header">Enter your credentials to get started</string>
+    <string name="email">Email address</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>

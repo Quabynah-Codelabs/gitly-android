@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.sql.Date
 
 /**
  * User data model
@@ -17,5 +16,5 @@ data class User(
     val email: String,
     var name: String,
     var avatar: String? = null,
-    val timestamp: Date = Date(System.currentTimeMillis())
+    @field:SerializedName("createdOn") val timestamp: Long = System.currentTimeMillis()
 ) : Parcelable

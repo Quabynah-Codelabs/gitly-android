@@ -2,8 +2,6 @@ import { Router, Request, Response } from "express";
 import bycrypt from "bcrypt";
 import Joi from "joi";
 import _ from "lodash";
-import jwt from "jsonwebtoken";
-import config from "config";
 import { User } from "../models/user";
 
 // Setup router

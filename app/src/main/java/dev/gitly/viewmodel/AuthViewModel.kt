@@ -2,22 +2,35 @@ package dev.gitly.viewmodel
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
 import dev.gitly.model.data.User
 import dev.gitly.model.sources.remote.LoginRequest
 import dev.gitly.model.sources.remote.WebService
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Authentication states
  */
 enum class AuthState {
     AUTHENTICATING, AUTHENTICATED, ERROR, NONE
+}
+
+/**
+ * Factory for [AuthViewModel]
+ */
+class AuthViewModelFactory @Inject constructor(
+    @Assisted private val prefs: AuthPrefs,
+    @Assisted private val service: WebService
+) : ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return AuthViewModel(prefs, service) as T
+    }
+
 }
 
 /**
