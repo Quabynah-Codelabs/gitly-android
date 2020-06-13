@@ -3,6 +3,8 @@ package dev.gitly.core.prefs
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,6 +15,10 @@ import javax.inject.Singleton
 class AuthPrefs @Inject constructor(context: Context) {
     private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }
 
+    // live token listener
+    private val _liveToken = MutableLiveData<String?>()
+    val refreshedToken: LiveData<String?> get() = _liveToken
+
     // Access token for user
     var token: String? = null
         get() = prefs.getString("token", null)
@@ -21,6 +27,7 @@ class AuthPrefs @Inject constructor(context: Context) {
                 putString("token", value)
                 apply()
             }
+            _liveToken.postValue(value)
             field = value
         }
 

@@ -8,6 +8,7 @@ import dev.gitly.debugger
 import dev.gitly.model.data.User
 import dev.gitly.model.sources.remote.LoginRequest
 import dev.gitly.model.sources.remote.WebService
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,6 +59,8 @@ class AuthViewModel @ViewModelInject constructor(
                 val accessToken = webService.getAccessToken(LoginRequest(email, password))
                 // save token
                 authPrefs.token = accessToken.token
+                // simulate delay to help setup shared preferences
+                delay(1500)
                 // get current user
                 val user = webService.getCurrentUser()
                 // save user id
@@ -94,6 +97,7 @@ class AuthViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             authPrefs.logout()
             _currentUser.value = null
+            _authState.value = AuthState.NONE
         }
     }
 

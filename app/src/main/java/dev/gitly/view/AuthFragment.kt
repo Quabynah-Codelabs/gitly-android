@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.databinding.AuthFragmentBinding
+import dev.gitly.debugger
 import dev.gitly.model.sources.remote.WebService
 import dev.gitly.viewmodel.AuthState
 import dev.gitly.viewmodel.AuthViewModel
@@ -53,6 +54,12 @@ class AuthFragment : Fragment() {
         // Init snackbar
         snackbar = Snackbar.make(binding.root, "Message goes here", Snackbar.LENGTH_LONG)
 
+        // observe token change
+        prefs.refreshedToken.observe(viewLifecycleOwner, { refreshedToken ->
+            debugger("Refreshed token -> $refreshedToken")
+            binding.token = refreshedToken
+        })
+
         // observe auth state
         viewModel.authState.observe(viewLifecycleOwner, { state ->
             binding.authState = state
@@ -87,7 +94,6 @@ class AuthFragment : Fragment() {
 
         // perform binding
         binding.run {
-            prefs = this@AuthFragment.prefs
             viewModel = this@AuthFragment.viewModel
             userEmail.addTextChangedListener { email = it.toString() }
             userPassword.addTextChangedListener { password = it.toString() }
