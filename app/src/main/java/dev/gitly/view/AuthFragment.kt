@@ -43,7 +43,6 @@ class AuthFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        prefs.logout()
 
         // Init viewmodel
         viewModel = ViewModelProvider(
