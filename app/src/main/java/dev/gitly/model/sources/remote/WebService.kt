@@ -12,13 +12,13 @@ interface WebService {
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("/oauth")
-    suspend fun loginAsync(
+    suspend fun getAccessToken(
         @Body loginRequest: LoginRequest
     ): AccessToken
 
     @Headers("Accept: application/json")
     @GET("/api/users/me")
-    suspend fun getCurrentUserAsync(): User
+    suspend fun getCurrentUser(): User
 
     @Headers("Accept: application/json")
     @PUT("/api/users/me")

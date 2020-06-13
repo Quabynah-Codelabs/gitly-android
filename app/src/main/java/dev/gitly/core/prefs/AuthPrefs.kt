@@ -13,29 +13,37 @@ import javax.inject.Singleton
 class AuthPrefs @Inject constructor(context: Context) {
     private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }
 
-    val token: String?
+    // Access token for user
+    var token: String? = null
         get() = prefs.getString("token", null)
-    val userId: String?
+        set(value) {
+            prefs.edit {
+                putString("token", value)
+                apply()
+            }
+            field = value
+        }
+
+    // User id
+    var userId: String? = null
         get() = prefs.getString("id", null)
+        set(value) {
+            prefs.edit {
+                putString("id", value)
+                apply()
+            }
+            field = value
+        }
 
+    // Sign out current user
     fun logout() {
-        prefs.edit {
-            clear()
-            apply()
-        }
+        // Alternatively
+        //prefs.edit {
+        //    clear()
+        //    apply()
+        //}
+        this.token = null
+        this.userId = null
     }
 
-    fun login(token: String?) {
-        prefs.edit {
-            putString("token", token)
-            apply()
-        }
-    }
-
-    fun updateUserId(id: String?) {
-        prefs.edit {
-            putString("id", id)
-            apply()
-        }
-    }
 }

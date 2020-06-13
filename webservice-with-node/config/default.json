@@ -1,0 +1,4 @@
+{
+    "gitly_server_url": "mongodb://localhost/gitly",
+    "jwt_private_key": "gitly_jwt_private_key"
+  }
