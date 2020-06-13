@@ -6,4 +6,5 @@
     <string name="login">Login</string>
     <string name="get_user">Get profile</string>
     <string name="logout">Logout</string>
+    <string name="explore">Explore</string>
 </resources>
