@@ -26,6 +26,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = ["room.schemaLocation":
+//                                     "$projectDir/schemas".toString()]
+//            }
+//        }
+
 //        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
 //        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
 //        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""

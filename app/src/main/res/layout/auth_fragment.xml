@@ -5,13 +5,27 @@
 
     <data>
 
+        <import type="dev.gitly.viewmodel.AuthState" />
+
+        <import type="dev.gitly.core.prefs.AuthPrefs" />
+
+        <import type="dev.gitly.viewmodel.AuthViewModel" />
+
+        <import type="dev.gitly.model.data.User" />
+
+        <import type="android.view.View" />
+
         <variable
             name="authState"
-            type="dev.gitly.viewmodel.AuthState" />
+            type="AuthState" />
+
+        <variable
+            name="prefs"
+            type="AuthPrefs" />
 
         <variable
             name="viewModel"
-            type="dev.gitly.viewmodel.AuthViewModel" />
+            type="AuthViewModel" />
 
         <variable
             name="email"
@@ -23,7 +37,7 @@
 
         <variable
             name="currentUser"
-            type="dev.gitly.model.data.User" />
+            type="User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,12 +73,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
             android:hint="@string/email"
+            android:visibility="@{prefs.token == null ? View.VISIBLE : View.GONE, default=`visible`}"
             app:layout_constraintTop_toBottomOf="@id/login_helper">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="@{prefs.token == null, default=`true`}"
                 android:inputType="textEmailAddress"
                 tools:text="gitly@domain.com" />
 
@@ -76,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
             android:hint="@string/password"
+            android:visibility="@{prefs.token == null ? View.VISIBLE : View.GONE, default=`visible`}"
             app:counterEnabled="true"
             app:counterMaxLength="25"
             app:layout_constraintTop_toBottomOf="@id/email_container"
@@ -85,19 +102,32 @@
                 android:id="@+id/user_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="@{prefs.token == null, default=`true`}"
                 android:inputType="textPassword"
                 tools:text="@tools:sample/full_names" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:onClick="@{(view) -> viewModel.getAccessToken(email, password)}"
+            android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
+            android:onClick="@{() -> viewModel.getAccessToken(email, password)}"
             android:text="@string/login"
+            android:visibility="@{prefs.token == null ? View.VISIBLE : View.GONE, default=`visible`}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_container" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xxlarge"
+            android:onClick="@{() -> viewModel.viewCurrentUserProfile()}"
+            android:text="@string/get_user"
+            android:visibility="@{prefs.token != null? View.VISIBLE : View.GONE, default=`gone`}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

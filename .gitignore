@@ -1,6 +1,7 @@
 # Node modules
 **/node_modules/
 **/gen/
+**/schemas/
 
 # Built application files
 *.apk

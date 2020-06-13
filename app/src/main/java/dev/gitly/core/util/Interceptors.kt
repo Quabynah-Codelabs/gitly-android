@@ -13,12 +13,12 @@ import javax.inject.Inject
 class GitlyInterceptor @Inject constructor(
     @Assisted private val authPrefs: AuthPrefs
 ) : Interceptor {
+    private val token = authPrefs.token
+
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-        request.apply {
-            headers("x-auth-token: ${authPrefs.token}")
-            headers("Accept: application/json")
-        }
+        val request = chain.request().newBuilder().apply {
+            if (!token.isNullOrEmpty()) addHeader("x-auth-token", token)
+        }.build()
         return chain.proceed(request)
     }
 }

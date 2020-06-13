@@ -12,12 +12,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://localhost:27017/gitly/"
+    private const val BASE_URL = "http://10.0.2.2:5000/"
 
     @Singleton
     @Provides
@@ -33,6 +34,8 @@ object NetworkModule {
         val client = OkHttpClient.Builder().apply {
             addInterceptor(loggingInterceptor)
             addInterceptor(gitlyInterceptor)
+            callTimeout(30L, TimeUnit.SECONDS)
+            connectTimeout(60L, TimeUnit.SECONDS)
         }.build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

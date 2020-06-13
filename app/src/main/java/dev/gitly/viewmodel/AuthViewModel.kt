@@ -54,11 +54,16 @@ class AuthViewModel @ViewModelInject constructor(
         _authState.postValue(AuthState.AUTHENTICATING)
         viewModelScope.launch {
             try {
+                // get access token from server
                 val accessToken = webService.getAccessToken(LoginRequest(email, password))
-                debugger(accessToken.token)
+                // save token
                 authPrefs.token = accessToken.token
+                // get current user
                 val user = webService.getCurrentUser()
+                // save user id
                 authPrefs.userId = user.id
+                // update UI
+                _currentUser.postValue(user)
                 _authState.postValue(AuthState.AUTHENTICATED)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
@@ -68,10 +73,14 @@ class AuthViewModel @ViewModelInject constructor(
     }
 
     // Get the current user
-    fun getCurrentUser() {
+    fun viewCurrentUserProfile() {
         viewModelScope.launch {
             try {
+                // get current user
                 val user = webService.getCurrentUser()
+                // save user id
+                authPrefs.userId = user.id
+                // update UI
                 _currentUser.postValue(user)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)

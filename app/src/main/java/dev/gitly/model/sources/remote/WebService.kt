@@ -9,7 +9,6 @@ import retrofit2.http.*
  */
 interface WebService {
 
-    @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("/oauth")
     suspend fun getAccessToken(
