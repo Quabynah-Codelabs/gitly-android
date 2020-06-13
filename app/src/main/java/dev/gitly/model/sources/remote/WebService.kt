@@ -22,6 +22,9 @@ interface WebService {
     @Headers("Accept: application/json")
     @PUT("/api/users/me")
     suspend fun updateUserAsync(@Body user: User): User
+
+    @DELETE("/api/users/{id}")
+    suspend fun deleteUser(@Path("id") userId: String?)
 }
 
 /**
