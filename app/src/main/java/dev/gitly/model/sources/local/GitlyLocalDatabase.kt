@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import dev.gitly.debugger
-import dev.gitly.model.data.Repo
+import dev.gitly.model.data.User
+import javax.inject.Singleton
 
-@Database(entities = [Repo::class], version = 1, exportSchema = true)
+@Singleton
+@Database(entities = [User::class], version = 2, exportSchema = true)
 abstract class GitlyLocalDatabase : RoomDatabase() {
-    abstract fun repoDao(): RepoDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
@@ -26,6 +29,13 @@ abstract class GitlyLocalDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         debugger("Gitly local database created")
+                    }
+                })
+                .fallbackToDestructiveMigrationOnDowngrade()
+                .addMigrations(object : Migration(1, 2) {
+                    override fun migrate(database: SupportSQLiteDatabase) {
+                        // Removed repos table
+                        database.execSQL("drop table repos")
                     }
                 })
                 .build().also { instance = it }

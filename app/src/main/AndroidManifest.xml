@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="dev.gitly"
     android:installLocation="auto">
 
@@ -35,16 +34,16 @@
             <nav-graph android:value="@navigation/nav_graph" />
         </activity>
 
-        <provider
+        <!--<provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
             tools:node="merge">
-            <!-- This entry makes WorkManagerInitializer discoverable. -->
+
             <meta-data
                 android:name="dev.gitly.core.worker.WorkManagerInitializer"
                 android:value="androidx.startup" />
-        </provider>
+        </provider>-->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

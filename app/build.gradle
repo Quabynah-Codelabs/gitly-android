@@ -26,9 +26,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
-        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
-        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
+//        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
+//        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
+//        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
     }
 
     signingConfigs {
@@ -88,7 +88,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // Navigation
-    def nav_version = "2.3.0-rc01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -114,11 +113,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     // Hilt DI
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+    implementation 'androidx.hilt:hilt-work:1.0.0-alpha01'
+//    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
 
     // App Startup
-    implementation "androidx.startup:startup-runtime:1.0.0-alpha01"
+    // implementation "androidx.startup:startup-runtime:1.0.0-alpha01"
 
     // WorkManager
     def work_version = "2.3.4"
@@ -133,8 +135,8 @@ dependencies {
 
     // Paging
     def paging_version = "3.0.0-alpha01"
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    testImplementation "androidx.paging:paging-common:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -3,7 +3,6 @@ package dev.gitly
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-
 import timber.log.Timber.DebugTree
 
 
@@ -11,7 +10,10 @@ import timber.log.Timber.DebugTree
  * [Application] entry point
  */
 @HiltAndroidApp
-class GitlyApp : Application() {
+class GitlyApp : Application()/*, Configuration.Provider*/ {
+
+//    @Inject
+//    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -24,4 +26,8 @@ class GitlyApp : Application() {
         // Test debugger
         debugger("Application instance created successfully")
     }
+
+//    override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()
+//        .setWorkerFactory(workerFactory)
+//        .build()
 }

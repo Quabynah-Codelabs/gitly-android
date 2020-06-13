@@ -1,5 +1,6 @@
 package dev.gitly.core.util
 
+import androidx.hilt.Assisted
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
 import okhttp3.Interceptor
@@ -18,7 +19,8 @@ annotation class DefaultWebService
 /**
  * Application's WebService interceptor
  */
-class GitlyInterceptor @Inject constructor(private val authPrefs: AuthPrefs) : Interceptor {
+class GitlyInterceptor @Inject constructor(
+    @Assisted private val authPrefs: AuthPrefs) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         request.apply {

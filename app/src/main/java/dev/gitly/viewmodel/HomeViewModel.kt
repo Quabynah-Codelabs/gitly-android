@@ -1,7 +1,6 @@
 package dev.gitly.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-}
+class HomeViewModel @ViewModelInject constructor() : ViewModel()

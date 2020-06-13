@@ -3,11 +3,11 @@ package dev.gitly.model
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.components.ActivityComponent
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.AuthWebService
-import dev.gitly.core.util.GitlyInterceptor
 import dev.gitly.core.util.DefaultWebService
+import dev.gitly.core.util.GitlyInterceptor
 import dev.gitly.debugger
 import dev.gitly.model.sources.remote.WebService
 import okhttp3.OkHttpClient
@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(ActivityComponent::class)
 object WebServiceUtil {
     private const val BASE_URL = "https://api.github.com/"
     private const val AUTH_BASE_URL = "https://github.com/"
