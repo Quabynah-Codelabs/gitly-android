@@ -1,9 +1,10 @@
 import express, { Application, Request, Response } from "express";
-import mongoose, { Error } from "mongoose";
+import mongoose from "mongoose";
 import morgan from "morgan";
 import users from "./routes/users";
 import auth from "./routes/auth";
 import config from "config";
+import error from "./middlewares/error";
 
 // Check for the existence of the server url
 if (!config.get("gitly_server_url") || !config.get("jwt_private_key")) {
@@ -19,12 +20,18 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
-app.get("/api", (req: Request, res: Response) => {
-  return res.send("Accessing Gitly server");
-});
-app.post("/api", (req: Request, res: Response) => {
-  return res.send("Accessing Gitly server");
-});
+app.get(
+  "/api",
+  error((req: Request, res: Response) => {
+    return res.send("Accessing Gitly server");
+  })
+);
+app.post(
+  "/api",
+  error((req: Request, res: Response) => {
+    return res.send("Accessing Gitly server");
+  })
+);
 app.use("/api/users", users);
 app.use("/oauth", auth);
 
