@@ -1,4 +1,4 @@
-package dev.gitly.view
+package dev.gitly.view.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater

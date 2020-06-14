@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.HomeFragment">
+        tools:context=".view.home.HomeFragment">
 
         <TextView
             android:id="@+id/user_name"
@@ -32,7 +32,8 @@
             android:text="@{currentUser.name, default=`No name set`}"
             android:textAppearance="?textAppearanceHeadline5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
 
         <Button
             android:layout_width="wrap_content"

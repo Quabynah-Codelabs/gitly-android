@@ -13,6 +13,10 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+// query git for the SHA, Tag and commit count. Use these to automate versioning.
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def gitCommitCount = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -21,8 +25,8 @@ android {
         applicationId "dev.gitly"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode gitCommitCount
+        versionName gitSha
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -33,6 +37,8 @@ android {
             }
         }
 
+        buildConfigField "String", "GIT_SHA", "$gitSha"
+        buildConfigField "String", "GIT_COMMIT", "$gitCommitCount"
 //        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
 //        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
 //        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
@@ -151,6 +157,9 @@ dependencies {
     def paging_version = "3.0.0-alpha01"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+
+    // Bypass
+//    implementation project(":bypass")
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

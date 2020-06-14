@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Type.H4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/museo_moderno_medium</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
     <style name="Type.H5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/rubik</item>
+        <item name="fontFamily">@font/museo_moderno_medium</item>
     </style>
 
     <style name="Type.H6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/rubik</item>
+        <item name="fontFamily">@font/museo_moderno</item>
     </style>
 
     <style name="Type.B1" parent="TextAppearance.MaterialComponents.Body1">
@@ -26,6 +31,10 @@
     </style>
 
     <style name="Type.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/rubik</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="Type.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/rubik_medium</item>
     </style>
 </resources>

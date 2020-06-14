@@ -41,18 +41,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_xxlarge"
-        tools:context=".view.AuthFragment">
+        tools:context=".view.auth.AuthFragment">
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/logo_height"
+            android:layout_marginTop="@dimen/spacing_xxxlarge"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/logo"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/login_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxxlarge"
             android:gravity="center"
             android:paddingVertical="@dimen/spacing_large"
             android:text="@string/app_name"
-            android:textAppearance="?textAppearanceHeadline5"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="?textAppearanceHeadline4"
+            app:layout_constraintTop_toBottomOf="@id/app_logo" />
 
         <TextView
             android:id="@+id/login_helper"
