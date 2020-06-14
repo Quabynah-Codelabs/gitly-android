@@ -7,8 +7,6 @@
 
         <import type="dev.gitly.viewmodel.AuthState" />
 
-        <import type="dev.gitly.core.prefs.AuthPrefs" />
-
         <import type="dev.gitly.viewmodel.AuthViewModel" />
 
         <import type="dev.gitly.model.data.User" />
