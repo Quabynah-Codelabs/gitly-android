@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/logo_height"
                 android:layout_marginTop="@dimen/spacing_xxxlarge"
                 android:contentDescription="@string/app_name"
-                android:src="@mipmap/logo"
+                android:src="@drawable/logo"
                 app:tint="?attr/colorPrimary" />
 
             <TextView
