@@ -37,116 +37,162 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/spacing_xxlarge"
+        app:layoutDescription="@xml/auth_fragment_xml_constraintlayout_scene"
         tools:context=".view.auth.AuthFragment">
 
-        <ImageView
-            android:id="@+id/app_logo"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/logo_height"
-            android:layout_marginTop="@dimen/spacing_xxxlarge"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/login_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingVertical="@dimen/spacing_large"
-            android:text="@string/app_name"
-            android:textAppearance="?textAppearanceHeadline4"
-            app:layout_constraintTop_toBottomOf="@id/app_logo" />
-
-        <TextView
-            android:id="@+id/login_helper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:gravity="center"
-            android:text="@string/login_header"
-            android:textAppearance="?textAppearanceSubtitle2"
-            app:layout_constraintTop_toBottomOf="@id/login_title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:hint="@string/email"
-            android:visibility="@{token == null ? View.VISIBLE : View.GONE, default=`visible`}"
-            app:layout_constraintTop_toBottomOf="@id/login_helper">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="@{token == null, default=`true`}"
-                android:inputType="textEmailAddress"
-                tools:text="gitly@domain.com" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:hint="@string/password"
-            android:visibility="@{token == null ? View.VISIBLE : View.GONE, default=`visible`}"
-            app:counterEnabled="true"
-            app:counterMaxLength="25"
-            app:layout_constraintTop_toBottomOf="@id/email_container"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="@{token == null, default=`true`}"
-                android:inputType="textPassword"
-                tools:text="@tools:sample/full_names" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
-            android:onClick="@{() -> viewModel.getAccessToken(email, password)}"
-            android:text="@string/login"
-            android:visibility="@{token == null ? View.VISIBLE : View.GONE, default=`visible`}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_container" />
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:backgroundTint="?attr/colorError"
-            android:onClick="@{() -> viewModel.logout()}"
-            android:text="@string/logout"
-            android:visibility="@{token != null? View.VISIBLE : View.GONE, default=`gone`}"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nav_home" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/nav_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxlarge"
-            android:text="@string/explore"
-            android:visibility="@{token != null? View.VISIBLE : View.GONE, default=`gone`}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_container" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_xxlarge">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/app_logo"
+                    android:layout_width="@dimen/large_avatar_size"
+                    android:layout_height="@dimen/large_avatar_size"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/logo"
+                    app:tint="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/login_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xlarge"
+                    android:gravity="start"
+                    android:text="@string/login_title"
+                    android:textAppearance="?textAppearanceHeadline4" />
+
+                <TextView
+                    android:id="@+id/login_helper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/mentors"
+                    android:textAppearance="?textAppearanceHeadline4"
+                    android:textColor="?colorSecondary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:gravity="start|center_vertical"
+                    android:paddingVertical="@dimen/spacing_small"
+                    android:text="@string/login_header"
+                    android:textAppearance="?textAppearanceBody2" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_xxlarge"
+                android:paddingVertical="@dimen/spacing_xxlarge">
+
+                <!--<editor-fold desc="Username field">-->
+                <!--<com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:hint="@string/username">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{token == null, default=`true`}"
+                        android:inputType="textPersonName|textCapWords|textAutoComplete|textAutoCorrect" />
+
+                </com.google.android.material.textfield.TextInputLayout>-->
+                <!--</editor-fold>-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:hint="@string/email">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{token == null, default=`true`}"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:hint="@string/password"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{token == null, default=`true`}"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xxlarge"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/register"
+                        style="?materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
+                        android:onClick="@{() -> viewModel.getAccessToken(email, password)}"
+                        android:text="@string/register" />
+
+                    <Button
+                        android:id="@+id/login"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        android:layout_weight="1"
+                        android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
+                        android:onClick="@{() -> viewModel.getAccessToken(email, password)}"
+                        android:text="@string/login" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

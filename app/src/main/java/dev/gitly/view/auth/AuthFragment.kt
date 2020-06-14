@@ -8,7 +8,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
@@ -86,7 +85,6 @@ class AuthFragment : Fragment() {
             viewModel = this@AuthFragment.viewModel
             userEmail.addTextChangedListener { email = it.toString() }
             userPassword.addTextChangedListener { password = it.toString() }
-            navHome.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_home) }
             executePendingBindings()
         }
     }

@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/app_logo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/logo_height"
+                android:layout_height="@dimen/small_logo_height"
                 android:layout_marginTop="@dimen/spacing_xxxlarge"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/logo"
@@ -35,6 +35,21 @@
                 android:paddingVertical="@dimen/spacing_large"
                 android:text="@string/app_name"
                 android:textAppearance="?textAppearanceHeadline4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="@dimen/spacing_small"
+                android:text="@string/login_header"
+                android:textAppearance="?textAppearanceBody2" />
+
+            <Button
+                android:id="@+id/get_started"
+                android:layout_width="@dimen/logo_height"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:text="@string/get_started" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
