@@ -15,7 +15,7 @@
         <action
             android:id="@+id/action_nav_dest_auth_to_nav_dest_home"
             app:destination="@id/nav_dest_home"
-            app:popUpTo="@id/nav_dest_welcome"
+            app:popUpTo="@id/nav_dest_auth"
             app:popUpToInclusive="true" />
 
     </fragment>

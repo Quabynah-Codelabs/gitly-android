@@ -111,12 +111,14 @@
                 android:paddingVertical="@dimen/spacing_xxlarge">
 
                 <!--<editor-fold desc="Username field">-->
-                <!--<com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:hint="@string/username">
+                    android:hint="@string/username"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/user_name"
@@ -125,7 +127,7 @@
                         android:enabled="@{token == null, default=`true`}"
                         android:inputType="textPersonName|textCapWords|textAutoComplete|textAutoCorrect" />
 
-                </com.google.android.material.textfield.TextInputLayout>-->
+                </com.google.android.material.textfield.TextInputLayout>
                 <!--</editor-fold>-->
 
                 <com.google.android.material.textfield.TextInputLayout
