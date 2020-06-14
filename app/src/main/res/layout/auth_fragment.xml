@@ -174,7 +174,9 @@
                         android:layout_height="wrap_content"
                         android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
                         android:onClick="@{() -> viewModel.getAccessToken(email, password)}"
-                        android:text="@string/register" />
+                        android:text="@string/register"
+                        android:visibility="invisible"
+                        tools:visibility="visible" />
 
                     <Button
                         android:id="@+id/login"

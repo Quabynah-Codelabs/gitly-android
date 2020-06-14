@@ -32,6 +32,10 @@ class AuthViewModel @ViewModelInject constructor(
 
     // Get access token
     fun getAccessToken(email: String, password: String) {
+        if (email.isEmpty() || password.isEmpty()) {
+            _authState.postValue(AuthState.ERROR)
+            return
+        }
         _authState.postValue(AuthState.AUTHENTICATING)
         viewModelScope.launch {
             try {

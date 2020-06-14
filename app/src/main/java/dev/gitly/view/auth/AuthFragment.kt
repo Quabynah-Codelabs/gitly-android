@@ -14,7 +14,6 @@ import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.databinding.AuthFragmentBinding
 import dev.gitly.debugger
-import dev.gitly.model.sources.remote.WebService
 import dev.gitly.viewmodel.AuthState
 import dev.gitly.viewmodel.AuthViewModel
 import javax.inject.Inject
@@ -26,9 +25,6 @@ class AuthFragment : Fragment() {
 
     @Inject
     lateinit var prefs: AuthPrefs
-
-    @Inject
-    lateinit var service: WebService
 
     private lateinit var binding: AuthFragmentBinding
     private lateinit var snackbar: Snackbar
