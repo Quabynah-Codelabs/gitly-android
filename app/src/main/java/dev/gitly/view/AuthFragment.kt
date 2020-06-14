@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,13 +18,12 @@ import dev.gitly.debugger
 import dev.gitly.model.sources.remote.WebService
 import dev.gitly.viewmodel.AuthState
 import dev.gitly.viewmodel.AuthViewModel
-import dev.gitly.viewmodel.AuthViewModelFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
 
-    private lateinit var viewModel: AuthViewModel /*by viewModels()*/
+    private val viewModel: AuthViewModel by viewModels()
 
     @Inject
     lateinit var prefs: AuthPrefs
@@ -46,12 +45,6 @@ class AuthFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Init viewmodel
-        viewModel = ViewModelProvider(
-            this,
-            AuthViewModelFactory(prefs, service)
-        ).get(AuthViewModel::class.java)
-
         // Init snackbar
         snackbar = Snackbar.make(binding.root, "Message goes here", Snackbar.LENGTH_LONG)
 
@@ -71,7 +64,7 @@ class AuthFragment : Fragment() {
                 }
 
                 AuthState.AUTHENTICATED -> snackbar.run {
-                    setText("Welcome back, ${binding.currentUser?.name}!")
+                    setText("Welcome back!")
                     show()
                 }
 
@@ -86,11 +79,6 @@ class AuthFragment : Fragment() {
                 else -> {
                 }
             }
-        })
-
-        // observe user state
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
-            binding.currentUser = user
         })
 
         // perform binding

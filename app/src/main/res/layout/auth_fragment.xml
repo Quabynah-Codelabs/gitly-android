@@ -35,9 +35,6 @@
             name="password"
             type="String" />
 
-        <variable
-            name="currentUser"
-            type="User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

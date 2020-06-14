@@ -26,12 +26,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments += ["room.schemaLocation": "$projectDir/schemas".toString(),
-//                              "room.incremental"   : "true"]
-//            }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString(),
+                              "room.incremental"   : "true"]
+            }
+        }
 
 //        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
 //        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""

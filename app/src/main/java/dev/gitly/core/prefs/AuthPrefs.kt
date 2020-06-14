@@ -17,6 +17,10 @@ class AuthPrefs @Inject constructor(context: Context) {
     private val _liveToken = MutableLiveData<String?>()
     val refreshedToken: LiveData<String?> get() = _liveToken
 
+    init {
+        _liveToken.value = prefs.getString("token", null)
+    }
+
     // Access token for user
     var token: String? = null
         get() = prefs.getString("token", null)

@@ -11,7 +11,7 @@ import dev.gitly.model.data.User
 import javax.inject.Singleton
 
 @Singleton
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class], version = 1, exportSchema = true)
 abstract class GitlyLocalDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
