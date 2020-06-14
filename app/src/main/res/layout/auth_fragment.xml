@@ -35,11 +35,10 @@
 
     </data>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/auth_fragment_xml_constraintlayout_scene"
         tools:context=".view.auth.AuthFragment">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -66,8 +65,7 @@
                     android:layout_width="@dimen/large_avatar_size"
                     android:layout_height="@dimen/large_avatar_size"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/logo"
-                    app:tint="?colorPrimary" />
+                    android:src="@drawable/logo"/>
 
                 <TextView
                     android:id="@+id/login_title"
@@ -196,5 +194,5 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

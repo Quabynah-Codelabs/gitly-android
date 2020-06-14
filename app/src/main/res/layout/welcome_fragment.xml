@@ -24,8 +24,7 @@
                 android:layout_height="@dimen/small_logo_height"
                 android:layout_marginTop="@dimen/spacing_xxxlarge"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/logo"
-                app:tint="?attr/colorPrimary" />
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/login_title"
