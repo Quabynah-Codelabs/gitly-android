@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.gitly.BuildConfig
 import dev.gitly.R
 import dev.gitly.core.util.HtmlUtils
 import dev.gitly.databinding.WelcomeFragmentBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WelcomeFragment : Fragment() {
@@ -32,9 +37,18 @@ class WelcomeFragment : Fragment() {
         binding.run {
             val md = Bypass(requireContext(), Bypass.Options())
             val privacyMessage =
-                md.markdownToSpannable(getString(R.string.privacy_policy), privacyLink, null)
+                md.markdownToSpannable(
+                    "Current version ${BuildConfig.VERSION_NAME} ${getString(R.string.store_link)}",
+                    privacyLink,
+                    null
+                )
             HtmlUtils.setTextWithNiceLinks(privacyLink, privacyMessage)
             executePendingBindings()
+        }
+
+        lifecycleScope.launch {
+            delay(2500)
+            findNavController().navigate(R.id.action_nav_dest_welcome_to_nav_dest_auth)
         }
 
     }

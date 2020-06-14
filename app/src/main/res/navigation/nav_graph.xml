@@ -15,7 +15,7 @@
         <action
             android:id="@+id/action_nav_dest_auth_to_nav_dest_home"
             app:destination="@id/nav_dest_home"
-            app:popUpTo="@id/nav_dest_auth"
+            app:popUpTo="@id/nav_dest_welcome"
             app:popUpToInclusive="true" />
 
     </fragment>
@@ -29,10 +29,12 @@
         android:id="@id/nav_dest_welcome"
         android:name="dev.gitly.view.welcome.WelcomeFragment"
         android:label="WelcomeFragment"
-        tools:layout="@layout/welcome_fragment" >
+        tools:layout="@layout/welcome_fragment">
         <action
             android:id="@+id/action_nav_dest_welcome_to_nav_dest_auth"
-            app:destination="@id/nav_dest_auth" />
+            app:destination="@id/nav_dest_auth"
+            app:popUpTo="@id/nav_dest_welcome"
+            app:popUpToInclusive="true" />
     </fragment>
 
 
