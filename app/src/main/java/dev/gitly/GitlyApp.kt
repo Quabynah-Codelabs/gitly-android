@@ -1,19 +1,22 @@
 package dev.gitly
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
+import javax.inject.Inject
 
 
 /**
  * [Application] entry point
  */
 @HiltAndroidApp
-class GitlyApp : Application()/*, Configuration.Provider*/ {
+class GitlyApp : Application(), Configuration.Provider {
 
-//    @Inject
-//    lateinit var workerFactory: HiltWorkerFactory
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -27,7 +30,7 @@ class GitlyApp : Application()/*, Configuration.Provider*/ {
         debugger("Application instance created successfully")
     }
 
-//    override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()
-//        .setWorkerFactory(workerFactory)
-//        .build()
+    override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()
+        .setWorkerFactory(workerFactory)
+        .build()
 }

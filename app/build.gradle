@@ -26,12 +26,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments += ["room.schemaLocation": "$projectDir/schemas".toString(),
+//                              "room.incremental"   : "true"]
+//            }
+//        }
 
 //        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
 //        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
@@ -50,9 +50,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
         }
         release {
             signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
         }
     }
 
@@ -61,12 +65,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
-    dataBinding.enabled = true
-    viewBinding.enabled = true
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -128,9 +135,6 @@ dependencies {
     implementation "androidx.hilt:hilt-work:$hilt_jetpack"
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack"
 
-    // App Startup
-    // implementation "androidx.startup:startup-runtime:1.0.0-alpha01"
-
     // WorkManager
     def work_version = "2.3.4"
     implementation "androidx.work:work-runtime-ktx:$work_version"
@@ -139,8 +143,8 @@ dependencies {
 
     // Room
     def room_version = "2.2.5"
-    // -ktx
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // Paging

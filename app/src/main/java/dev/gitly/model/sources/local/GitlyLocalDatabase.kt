@@ -11,7 +11,7 @@ import dev.gitly.model.data.User
 import javax.inject.Singleton
 
 @Singleton
-@Database(entities = [User::class], version = 2, exportSchema = false)
+@Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class GitlyLocalDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
@@ -34,8 +34,7 @@ abstract class GitlyLocalDatabase : RoomDatabase() {
                 .fallbackToDestructiveMigrationOnDowngrade()
                 .addMigrations(object : Migration(1, 2) {
                     override fun migrate(database: SupportSQLiteDatabase) {
-                        // Removed repos table
-                        database.execSQL("drop table repos")
+
                     }
                 })
                 .build().also { instance = it }

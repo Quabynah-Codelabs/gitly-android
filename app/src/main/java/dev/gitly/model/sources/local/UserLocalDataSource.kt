@@ -1,6 +1,5 @@
 package dev.gitly.model.sources.local
 
-import androidx.hilt.Assisted
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.model.data.User
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +18,8 @@ interface UserLocalDataSource {
 }
 
 class UserLocalDataSourceImpl @Inject constructor(
-    @Assisted private val dao: UserDao,
-    @Assisted private val prefs: AuthPrefs
+    private val dao: UserDao,
+    private val prefs: AuthPrefs
 ) : UserLocalDataSource {
 
     override suspend fun getCurrentUser(): User? {

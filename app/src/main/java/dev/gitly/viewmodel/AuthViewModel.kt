@@ -23,8 +23,8 @@ enum class AuthState {
  * Factory for [AuthViewModel]
  */
 class AuthViewModelFactory @Inject constructor(
-    @Assisted private val prefs: AuthPrefs,
-    @Assisted private val service: WebService
+    private val prefs: AuthPrefs,
+    private val service: WebService
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -38,8 +38,8 @@ class AuthViewModelFactory @Inject constructor(
  * [ViewModel] for authentication
  */
 class AuthViewModel @ViewModelInject constructor(
-    @Assisted private val authPrefs: AuthPrefs,
-    @Assisted private val webService: WebService
+     private val authPrefs: AuthPrefs,
+     private val webService: WebService
 ) : ViewModel() {
 
     // Live data for authentication state

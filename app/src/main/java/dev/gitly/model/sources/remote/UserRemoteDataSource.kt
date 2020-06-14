@@ -1,6 +1,5 @@
 package dev.gitly.model.sources.remote
 
-import androidx.hilt.Assisted
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
 import dev.gitly.model.data.User
@@ -21,8 +20,8 @@ interface UserRemoteDataSource {
 }
 
 class UserRemoteDataSourceImpl @Inject constructor(
-    @Assisted private val service: WebService,
-    @Assisted private val prefs: AuthPrefs
+    private val service: WebService,
+    private val prefs: AuthPrefs
 ) : UserRemoteDataSource {
 
     override suspend fun getCurrentUser(): User? {

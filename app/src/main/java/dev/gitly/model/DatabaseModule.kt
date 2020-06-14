@@ -34,10 +34,12 @@ object DatabaseModule {
     @Provides
     fun provideUserDao(database: GitlyLocalDatabase): UserDao = database.userDao()
 
+    @Singleton
     @Provides
     fun provideUserLocalDataSource(userDao: UserDao, authPrefs: AuthPrefs): UserLocalDataSource =
         UserLocalDataSourceImpl(userDao, authPrefs)
 
+    @Singleton
     @Provides
     fun provideUserRemoteDataSource(
         webService: WebService,
@@ -45,6 +47,7 @@ object DatabaseModule {
     ): UserRemoteDataSource =
         UserRemoteDataSourceImpl(webService, authPrefs)
 
+    @Singleton
     @Provides
     fun provideUserRepository(
         localDataSource: UserLocalDataSource,

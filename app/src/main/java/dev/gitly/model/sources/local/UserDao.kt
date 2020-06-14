@@ -8,8 +8,8 @@ import dev.gitly.model.data.User
 interface UserDao : BaseDao<User> {
 
     @Query("select * from users where id is :id order by id desc")
-            /*suspend*/ fun getUser(id: String?): User?
+    suspend fun getUser(id: String?): User?
 
     @Query("delete from users where id is :id")
-            /*suspend*/ fun delete(id: String?)
+    suspend fun delete(id: String?)
 }

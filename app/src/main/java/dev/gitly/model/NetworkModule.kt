@@ -13,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -20,23 +21,58 @@ import javax.inject.Singleton
 object NetworkModule {
     private const val BASE_URL = "http://10.0.2.2:5000/"
 
-    @Singleton
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class OAuthOkHttpClient
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class AuthorizedOkHttpClient
+
+    @NetworkModule.AuthorizedOkHttpClient
     @Provides
-    fun provideWebService(prefs: AuthPrefs): WebService {
-        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    fun provideAuthorizedOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        gitlyInterceptor: GitlyInterceptor
+    ): OkHttpClient =
+        OkHttpClient.Builder().apply {
+            addInterceptor(loggingInterceptor)
+            addInterceptor(gitlyInterceptor)
+            callTimeout(30L, TimeUnit.SECONDS)
+            connectTimeout(60L, TimeUnit.SECONDS)
+        }.build()
+
+    @NetworkModule.OAuthOkHttpClient
+    @Provides
+    fun provideOAuthOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient =
+        OkHttpClient.Builder().apply {
+            addInterceptor(loggingInterceptor)
+            callTimeout(30L, TimeUnit.SECONDS)
+            connectTimeout(60L, TimeUnit.SECONDS)
+        }.build()
+
+    @Provides
+    fun provideGitlyInterceptor(authPrefs: AuthPrefs): GitlyInterceptor =
+        GitlyInterceptor(authPrefs)
+
+    @Provides
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 debugger(message)
             }
         }).apply {
             setLevel(HttpLoggingInterceptor.Level.BODY)
         }
-        val gitlyInterceptor = GitlyInterceptor(prefs)
-        val client = OkHttpClient.Builder().apply {
-            addInterceptor(loggingInterceptor)
-            addInterceptor(gitlyInterceptor)
-            callTimeout(30L, TimeUnit.SECONDS)
-            connectTimeout(60L, TimeUnit.SECONDS)
-        }.build()
+
+    @Singleton
+    @Provides
+    fun provideWebService(
+        prefs: AuthPrefs,
+        @NetworkModule.AuthorizedOkHttpClient client: OkHttpClient
+    ): WebService {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
