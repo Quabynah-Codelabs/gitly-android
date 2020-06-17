@@ -79,8 +79,8 @@ class AuthFragment : Fragment() {
         // perform binding
         binding.run {
             viewModel = this@AuthFragment.viewModel
-//            userEmail.addTextChangedListener { email = it.toString() }
-//            userPassword.addTextChangedListener { password = it.toString() }
+            userEmail.addTextChangedListener { email = it.toString() }
+            userPassword.addTextChangedListener { password = it.toString() }
             executePendingBindings()
         }
     }
