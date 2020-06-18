@@ -9,9 +9,9 @@
     <string name="explore">Explore</string>
     <string name="store_link">[Update now](https://play.google.com/store/apps/details?id=dev.gitly)</string>
     <string name="register">Sign up instead</string>
-    <string name="login_title">Get connected to the best</string>
+    <string name="login_title">Get connected to the best…</string>
     <string name="username">Full Name</string>
     <string name="sign_in">Sign In</string>
     <string name="get_started">Explore</string>
-    <string name="mentors">…Mentors</string>
+    <string name="mentors">Mentors</string>
 </resources>
