@@ -67,7 +67,6 @@ android {
         }
     }
 
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -145,7 +144,7 @@ dependencies {
     // WorkManager
     def work_version = "2.3.4"
     implementation "androidx.work:work-runtime-ktx:$work_version"
-    // hotfix
+    // hotfix for WorkManager
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     // Room
@@ -159,9 +158,10 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     testImplementation "androidx.paging:paging-common-ktx:$paging_version"
 
-    // Bypass
+    // Bypass: HTML link movement
     implementation project(":bypass")
 
+    // Core AndroidX Testing
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
