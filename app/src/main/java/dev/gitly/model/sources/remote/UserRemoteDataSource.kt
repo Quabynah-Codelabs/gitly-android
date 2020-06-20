@@ -3,6 +3,7 @@ package dev.gitly.model.sources.remote
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
 import dev.gitly.model.data.User
+import dev.gitly.model.sources.remote.service.WebService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

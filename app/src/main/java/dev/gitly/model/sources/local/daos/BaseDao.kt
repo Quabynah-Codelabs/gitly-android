@@ -1,4 +1,4 @@
-package dev.gitly.model.sources.local
+package dev.gitly.model.sources.local.daos
 
 import androidx.room.Delete
 import androidx.room.Insert

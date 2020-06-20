@@ -2,6 +2,7 @@ package dev.gitly.model.sources.local
 
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.model.data.User
+import dev.gitly.model.sources.local.daos.UserDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -8,7 +8,8 @@ import dev.gitly.BuildConfig
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.GitlyInterceptor
 import dev.gitly.debugger
-import dev.gitly.model.sources.remote.WebService
+import dev.gitly.model.sources.remote.service.SlackWebService
+import dev.gitly.model.sources.remote.service.WebService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -78,6 +79,19 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WebService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSlackWebService(
+        @NetworkModule.AuthorizedOkHttpClient client: OkHttpClient
+    ): SlackWebService {
+        return Retrofit.Builder()
+            .baseUrl("https://api.slack.com/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SlackWebService::class.java)
     }
 
 }

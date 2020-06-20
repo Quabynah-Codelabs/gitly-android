@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
-import dev.gitly.model.sources.remote.LoginRequest
-import dev.gitly.model.sources.remote.WebService
+import dev.gitly.model.sources.remote.service.LoginRequest
+import dev.gitly.model.sources.remote.service.WebService
 import kotlinx.coroutines.launch
 
 /**
@@ -40,7 +40,12 @@ class AuthViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             try {
                 // get access token from server
-                val accessToken = webService.getAccessToken(LoginRequest(email, password))
+                val accessToken = webService.getAccessToken(
+                    LoginRequest(
+                        email,
+                        password
+                    )
+                )
                 // save token
                 authPrefs.token = accessToken.token
                 // update UI

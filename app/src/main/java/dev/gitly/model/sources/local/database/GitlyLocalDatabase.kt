@@ -1,4 +1,4 @@
-package dev.gitly.model.sources.local
+package dev.gitly.model.sources.local.database
 
 import android.content.Context
 import androidx.room.Database
@@ -8,6 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import dev.gitly.debugger
 import dev.gitly.model.data.User
+import dev.gitly.model.sources.local.daos.UserDao
 import javax.inject.Singleton
 
 @Singleton
@@ -19,8 +20,10 @@ abstract class GitlyLocalDatabase : RoomDatabase() {
         @Volatile
         private var instance: GitlyLocalDatabase? = null
 
-        fun setup(context: Context): GitlyLocalDatabase = instance ?: synchronized(this) {
-            instance ?: Room.databaseBuilder(
+        fun setup(context: Context): GitlyLocalDatabase = instance
+            ?: synchronized(this) {
+            instance
+                ?: Room.databaseBuilder(
                 context,
                 GitlyLocalDatabase::class.java,
                 "gitly_app_db"

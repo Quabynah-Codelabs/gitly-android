@@ -1,4 +1,4 @@
-package dev.gitly.model.sources.remote
+package dev.gitly.model.sources.remote.service
 
 import dev.gitly.model.data.AccessToken
 import dev.gitly.model.data.User

@@ -1,4 +1,4 @@
-package dev.gitly.model.sources.local
+package dev.gitly.model.sources.local.daos
 
 import androidx.room.Dao
 import androidx.room.Query
