@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dev.gitly.BuildConfig
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.GitlyInterceptor
 import dev.gitly.debugger
@@ -19,7 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "http://10.0.2.2:5000/"
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
@@ -70,11 +70,10 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideWebService(
-        prefs: AuthPrefs,
         @NetworkModule.AuthorizedOkHttpClient client: OkHttpClient
     ): WebService {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

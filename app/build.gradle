@@ -37,10 +37,6 @@ android {
             }
         }
 
-        buildConfigField "String", "GIT_SHA", "$gitSha"
-//        buildConfigField "String", "CLIENT_ID", "\"$client_id\""
-//        buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
-//        buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
     }
 
     signingConfigs {
@@ -57,11 +53,17 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled false
             shrinkResources false
+            buildConfigField "String", "BASE_URL", "\"$local_base_url\""
+            buildConfigField "String", "GIT_SHA", "$gitSha"
+            buildConfigField "String", "CLIENT_ID", "\"$client_id\""
+            buildConfigField "String", "CLIENT_SECRET", "\"$client_secret\""
+            buildConfigField "String", "AUTH_CALLBACK", "\"$callback\""
         }
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
+            buildConfigField "String", "BASE_URL", "\"$live_base_url\""
         }
     }
 

@@ -68,10 +68,10 @@ class AuthFragment : Fragment() {
                     show()
                 }
 
-                AuthState.NONE -> {
+                AuthState.NONE -> { // do nothing
                 }
 
-                else -> {
+                else -> { // do nothing
                 }
             }
         })
