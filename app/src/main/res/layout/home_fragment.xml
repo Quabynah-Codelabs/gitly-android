@@ -31,19 +31,31 @@
             android:paddingVertical="@dimen/spacing_large"
             android:text="@{currentUser.name, default=`No name set`}"
             android:textAppearance="?textAppearanceHeadline5"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/full_names" />
 
         <Button
+            android:id="@+id/get_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxlarge"
+            android:layout_marginTop="@dimen/spacing_large"
             android:onClick="@{() -> model.viewCurrentUserProfile()}"
             android:text="@string/get_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/users_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbarStyle="outsideOverlay"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/get_profile"
+            tools:itemCount="5"
+            tools:listitem="@layout/user_item" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

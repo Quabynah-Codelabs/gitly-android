@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
@@ -20,13 +19,8 @@ import dev.gitly.databinding.WelcomeFragmentBinding
 import dev.gitly.debugger
 import dev.gitly.model.data.User
 import dev.gitly.model.sources.local.daos.UserDao
-import dev.gitly.view.adapter.UserLoadStateAdapter
-import dev.gitly.view.adapter.UsersAdapter
-import dev.gitly.viewmodel.UserViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 import javax.inject.Inject
 
@@ -37,9 +31,6 @@ class WelcomeFragment : Fragment() {
 
     @Inject
     lateinit var userDao: UserDao
-
-    private val usersAdapter = UsersAdapter()
-    private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,19 +56,8 @@ class WelcomeFragment : Fragment() {
 
             getStarted.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_welcome_to_nav_dest_auth) }
 
-            // TODO: Cut this section to the home screen
-            usersList.run {
-                usersAdapter.withLoadStateHeaderAndFooter(
-                    header = UserLoadStateAdapter { },
-                    footer = UserLoadStateAdapter { }
-                )
-                adapter = usersAdapter
-                setHasFixedSize(false)
-            }
-
             executePendingBindings()
         }
-
 
         // Add to database
         lifecycleScope.launch(Dispatchers.IO) {
@@ -93,11 +73,6 @@ class WelcomeFragment : Fragment() {
                 debugger(e.localizedMessage)
             }
 
-            withContext(Dispatchers.Main) {
-                userViewModel.getUsersStream().collectLatest {
-                    usersAdapter.submitData(it)
-                }
-            }
         }
 
 

@@ -7,16 +7,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.HomeFragmentBinding
+import dev.gitly.view.adapter.UserLoadStateAdapter
+import dev.gitly.view.adapter.UsersAdapter
 import dev.gitly.viewmodel.UserViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModels()
-
+    private val usersAdapter = UsersAdapter()
     private lateinit var binding: HomeFragmentBinding
 
     override fun onCreateView(
@@ -33,6 +38,14 @@ class HomeFragment : Fragment() {
         // setup binding
         binding.run {
             model = viewModel
+            usersList.run {
+                usersAdapter.withLoadStateHeaderAndFooter(
+                    header = UserLoadStateAdapter { },
+                    footer = UserLoadStateAdapter { }
+                )
+                adapter = usersAdapter
+                setHasFixedSize(false)
+            }
             executePendingBindings()
         }
 
@@ -40,6 +53,12 @@ class HomeFragment : Fragment() {
         viewModel.currentUser.observe(viewLifecycleOwner, { user ->
             binding.currentUser = user
         })
+
+        lifecycleScope.launch {
+            viewModel.getUsersStream().collectLatest {
+                usersAdapter.submitData(it)
+            }
+        }
     }
 
 }

@@ -31,7 +31,7 @@ interface WebService {
     suspend fun deleteUser(@Path("id") userId: String?)
 
     @FormUrlEncoded
-    @POST("/api/users")
+    @POST("/api/users/mentors")
     suspend fun requestMentors(
         @Field("page_index") pageIndex: Int,
         @Field("page_size") pageSize: Int

@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
@@ -47,6 +48,8 @@ class AuthFragment : Fragment() {
         prefs.refreshedToken.observe(viewLifecycleOwner, { refreshedToken ->
             debugger("Refreshed token -> $refreshedToken")
             binding.token = refreshedToken
+            if (!refreshedToken.isNullOrEmpty())
+                findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_home)
         })
 
         // observe auth state
@@ -58,9 +61,8 @@ class AuthFragment : Fragment() {
                     show()
                 }
 
-                AuthState.AUTHENTICATED -> snackbar.run {
-                    setText("Welcome back!")
-                    show()
+                AuthState.AUTHENTICATED -> { // do nothing
+
                 }
 
                 AuthState.ERROR -> snackbar.run {

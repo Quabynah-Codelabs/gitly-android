@@ -53,6 +53,20 @@ router.get(
   })
 );
 
+// get mentors
+router.post(
+  "/mentors",
+  auth,
+  error(async (req: Request, res: Response) => {
+    let users = await User.find()
+      .skip(req.body.page_size * (req.body.page_index - 1))
+      .limit(req.body.page_size);
+
+    // send user data
+    return res.status(200).send(users);
+  })
+);
+
 // update user
 router.put(
   "/me",
