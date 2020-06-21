@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "3b03b448-74f6-48e6-8654-b76c4bef1750",
+    "email": "r_coder@gitly.com",
+    "name": "Robert Callums",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  },
+  {
+    "_id": "af012fe2-f967-4c02-ae40-33d31e6201c8",
+    "email": "james_cameron@gitly.com",
+    "name": "James Cameron Jr.",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  },
+  {
+    "_id": "3a7b880f-73f0-4b64-b326-b07c05854430",
+    "email": "selina_montenescu@gitly.com",
+    "name": "Selina Montenescu",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  },
+  {
+    "_id": "4b60bafc-957a-4257-ae43-c7c3b1f962f7",
+    "email": "f_waterfalls@gitly.com",
+    "name": "Francois Waterfalls",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  },
+  {
+    "_id": "84086855-0154-4d28-b8ec-22bc344ddbe2",
+    "email": "d.giroux@gitly.com",
+    "name": "Dennis Giroux",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  },
+  {
+    "_id": "746f37ec-702f-4a87-9de5-e62822ceebfa",
+    "email": "ash@gitly.com",
+    "name": "Ashley Grimms",
+    "avatar": "",
+    "timestamp": 1592709690569,
+    "createdOn": 1592709690569
+  }
+]

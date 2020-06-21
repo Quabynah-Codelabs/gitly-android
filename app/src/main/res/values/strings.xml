@@ -14,4 +14,5 @@
     <string name="sign_in">Sign In</string>
     <string name="get_started">Explore</string>
     <string name="mentors">Mentors</string>
+    <string name="retry">Retry</string>
 </resources>

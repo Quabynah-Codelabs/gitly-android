@@ -7,11 +7,11 @@
 
         <import type="dev.gitly.model.data.User" />
 
-        <import type="dev.gitly.viewmodel.HomeViewModel" />
+        <import type="dev.gitly.viewmodel.UserViewModel" />
 
         <variable
             name="model"
-            type="HomeViewModel" />
+            type="UserViewModel" />
 
         <variable
             name="currentUser"

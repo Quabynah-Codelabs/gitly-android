@@ -10,12 +10,12 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.HomeFragmentBinding
-import dev.gitly.viewmodel.HomeViewModel
+import dev.gitly.viewmodel.UserViewModel
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: UserViewModel by viewModels()
 
     private lateinit var binding: HomeFragmentBinding
 

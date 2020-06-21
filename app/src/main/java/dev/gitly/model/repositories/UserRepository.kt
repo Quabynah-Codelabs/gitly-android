@@ -14,6 +14,10 @@ interface UserRepository {
     suspend fun updateProfile(user: User)
 
     suspend fun deleteAccount(isAdmin: Boolean)
+
+    suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User>
+
+    suspend fun getUserById(id: String): User?
 }
 
 /**
@@ -49,6 +53,18 @@ class UserRepositoryImpl @Inject constructor(
         if (!isAdmin) return
         local.deleteUser()
         remote.deleteUser()
+    }
+
+    override suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User> {
+        val users = remote.getUsers(pageIndex, pageSize)
+        if (users.isNotEmpty()) local.saveAll(users.toMutableList())
+        return local.getUsers(pageIndex, pageSize)
+    }
+
+    override suspend fun getUserById(id: String): User? {
+        val user = remote.getUserById(id)
+        if (user != null) local.save(user)
+        return local.getUserById(id)
     }
 
 }

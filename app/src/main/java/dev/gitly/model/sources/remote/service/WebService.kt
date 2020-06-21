@@ -17,7 +17,11 @@ interface WebService {
 
     @Headers("Accept: application/json")
     @GET("/api/users/me")
-    suspend fun getCurrentUser(): User
+    suspend fun getCurrentUser(): User?
+
+    @Headers("Accept: application/json")
+    @GET("/api/users/{id}")
+    suspend fun getUserById(@Path("id") id: String): User?
 
     @Headers("Accept: application/json")
     @PUT("/api/users/me")
@@ -25,6 +29,13 @@ interface WebService {
 
     @DELETE("/api/users/{id}")
     suspend fun deleteUser(@Path("id") userId: String?)
+
+    @FormUrlEncoded
+    @POST("/api/users")
+    suspend fun requestMentors(
+        @Field("page_index") pageIndex: Int,
+        @Field("page_size") pageSize: Int
+    ): List<User>
 }
 
 /**

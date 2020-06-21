@@ -14,9 +14,13 @@ import javax.inject.Inject
 interface UserRemoteDataSource {
     suspend fun getCurrentUser(): User?
 
+    suspend fun getUserById(id: String): User?
+
     suspend fun updateUser(user: User)
 
     suspend fun deleteUser()
+
+    suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User>
 
 }
 
@@ -31,6 +35,17 @@ class UserRemoteDataSourceImpl @Inject constructor(
         } catch (e: Exception) {
             debugger(e.localizedMessage)
             null
+        }
+    }
+
+    override suspend fun getUserById(id: String): User? {
+        return withContext(Dispatchers.IO) {
+            try {
+                service.getUserById(id)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                null
+            }
         }
     }
 
@@ -50,6 +65,16 @@ class UserRemoteDataSourceImpl @Inject constructor(
                 service.deleteUser(prefs.userId)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
+            }
+        }
+    }
+
+    override suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User> {
+        return withContext(Dispatchers.IO) {
+            try {
+                service.requestMentors(pageIndex, pageSize)
+            } catch (e: Exception) {
+                listOf()
             }
         }
     }
