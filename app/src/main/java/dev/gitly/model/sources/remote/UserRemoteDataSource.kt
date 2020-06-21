@@ -3,6 +3,7 @@ package dev.gitly.model.sources.remote
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.debugger
 import dev.gitly.model.data.User
+import dev.gitly.model.sources.remote.service.PagingRequest
 import dev.gitly.model.sources.remote.service.WebService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -72,7 +73,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
     override suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User> {
         return withContext(Dispatchers.IO) {
             try {
-                service.requestMentors(pageIndex, pageSize)
+                service.requestMentors(PagingRequest(pageIndex, pageSize))
             } catch (e: Exception) {
                 listOf()
             }

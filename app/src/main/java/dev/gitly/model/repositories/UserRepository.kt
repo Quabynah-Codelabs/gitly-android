@@ -27,6 +27,7 @@ class UserRepositoryImpl @Inject constructor(
     @Assisted private val local: UserLocalDataSource,
     @Assisted private val remote: UserRemoteDataSource
 ) : UserRepository {
+
     override suspend fun viewProfile(callback: Callback<Result<User>>) {
         callback(Result.Loading)
 

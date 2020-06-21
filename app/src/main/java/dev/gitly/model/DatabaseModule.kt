@@ -27,10 +27,6 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): GitlyLocalDatabase =
         GitlyLocalDatabase.setup(context)
 
-    @Singleton
-    @Provides
-    fun provideAuthPrefs(@ApplicationContext context: Context): AuthPrefs = AuthPrefs(context)
-
     @Provides
     fun provideUserDao(database: GitlyLocalDatabase): UserDao = database.userDao()
 

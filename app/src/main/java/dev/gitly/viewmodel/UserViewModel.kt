@@ -64,6 +64,6 @@ class UserViewModel @ViewModelInject constructor(
     }
 
     companion object {
-        private const val USER_PAGE_SIZE = 10
+        private const val USER_PAGE_SIZE = 5
     }
 }

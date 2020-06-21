@@ -30,11 +30,9 @@ interface WebService {
     @DELETE("/api/users/{id}")
     suspend fun deleteUser(@Path("id") userId: String?)
 
-    @FormUrlEncoded
     @POST("/api/users/mentors")
     suspend fun requestMentors(
-        @Field("page_index") pageIndex: Int,
-        @Field("page_size") pageSize: Int
+        @Body request: PagingRequest
     ): List<User>
 }
 
@@ -44,4 +42,12 @@ interface WebService {
 data class LoginRequest(
     val email: String?,
     val password: String
+)
+
+/**
+ * Page size request
+ */
+data class PagingRequest(
+    val page_index: Int,
+    val page_size: Int
 )

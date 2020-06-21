@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 
 /**
- * [SharedPreferences] implementation
+ * [SharedPreferences] implementation for authentication
  */
 class AuthPrefs @Inject constructor(context: Context) {
     private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }

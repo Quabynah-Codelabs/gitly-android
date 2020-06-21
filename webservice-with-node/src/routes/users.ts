@@ -61,6 +61,8 @@ router.post(
     let users = await User.find()
       .skip(req.body.page_size * (req.body.page_index - 1))
       .limit(req.body.page_size);
+      console.log(req.body);
+      
 
     // send user data
     return res.status(200).send(users);

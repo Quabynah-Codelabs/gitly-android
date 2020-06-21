@@ -1,50 +1,56 @@
 [
   {
-    "_id": "3b03b448-74f6-48e6-8654-b76c4bef1750",
+    "_id": "5eef86d816f31818f086974f",
     "email": "r_coder@gitly.com",
     "name": "Robert Callums",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   },
   {
-    "_id": "af012fe2-f967-4c02-ae40-33d31e6201c8",
+    "_id": "5eef871116f31818f0869750",
     "email": "james_cameron@gitly.com",
     "name": "James Cameron Jr.",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   },
   {
-    "_id": "3a7b880f-73f0-4b64-b326-b07c05854430",
+    "_id": "5eef872916f31818f0869751",
     "email": "selina_montenescu@gitly.com",
     "name": "Selina Montenescu",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   },
   {
     "_id": "4b60bafc-957a-4257-ae43-c7c3b1f962f7",
     "email": "f_waterfalls@gitly.com",
     "name": "Francois Waterfalls",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   },
   {
-    "_id": "84086855-0154-4d28-b8ec-22bc344ddbe2",
+    "_id": "5eef874a16f31818f0869752",
     "email": "d.giroux@gitly.com",
     "name": "Dennis Giroux",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   },
   {
-    "_id": "746f37ec-702f-4a87-9de5-e62822ceebfa",
+    "_id": "5eef877116f31818f0869753",
     "email": "ash@gitly.com",
     "name": "Ashley Grimms",
+    "password": "password2020",
     "avatar": "",
-    "timestamp": 1592709690569,
+    "timestamp": "2020-06-21T16:00:54.637Z",
     "createdOn": 1592709690569
   }
 ]

@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
+import dev.gitly.core.prefs.ThemePrefs
 import dev.gitly.databinding.HomeFragmentBinding
 import dev.gitly.view.adapter.UserLoadStateAdapter
 import dev.gitly.view.adapter.UsersAdapter
 import dev.gitly.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -23,6 +25,9 @@ class HomeFragment : Fragment() {
     private val viewModel: UserViewModel by viewModels()
     private val usersAdapter = UsersAdapter()
     private lateinit var binding: HomeFragmentBinding
+
+    @Inject
+    lateinit var themePrefs: ThemePrefs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +64,7 @@ class HomeFragment : Fragment() {
                 usersAdapter.submitData(it)
             }
         }
+
     }
 
 }
