@@ -9,10 +9,23 @@
     <string name="explore">Explore</string>
     <string name="store_link">[Update now](https://play.google.com/store/apps/details?id=dev.gitly)</string>
     <string name="register">Sign up instead</string>
-    <string name="login_title">Get connected to the best…</string>
+    <string name="login_title">Get connected to the best</string>
     <string name="username">Full Name</string>
     <string name="sign_in">Sign In</string>
     <string name="get_started">Explore</string>
-    <string name="mentors">Mentors</string>
     <string name="retry">Retry</string>
+    <string name="join_slack">Join slack</string>
+    <string name="popular">Popular</string>
+    <string name="mentors">Mentors</string>
+    <string name="search">Search</string>
+    <string name="toggle_theme">Toggle theme</string>
+    <string name="more">More options</string>
+    <string name="search_hint">Search anything</string>
+    <string name="cd_close_search">Close search</string>
+    <string name="cd_clear_search">Clear</string>
+    <string name="empty"> </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="proceed">Proceed</string>
+    <string name="sign_up">Sign up</string>
 </resources>

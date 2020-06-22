@@ -57,6 +57,11 @@ class AuthViewModel @ViewModelInject constructor(
         }
     }
 
+    // Register new user
+    fun register(name: String, email: String, password: String) {
+
+    }
+
     // Sign out
     fun logout() {
         viewModelScope.launch {

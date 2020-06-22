@@ -10,30 +10,32 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
-import dev.gitly.databinding.AuthFragmentBinding
+import dev.gitly.databinding.FragmentRegisterBinding
 import dev.gitly.debugger
 import dev.gitly.viewmodel.AuthState
 import dev.gitly.viewmodel.AuthViewModel
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class AuthFragment : Fragment() {
 
+/**
+ * Sign up a new [User]
+ */
+class RegisterFragment : Fragment() {
+    private lateinit var binding: FragmentRegisterBinding
 
     @Inject
     lateinit var prefs: AuthPrefs
     private val viewModel: AuthViewModel by viewModels()
     private lateinit var snackbar: Snackbar
-    private lateinit var binding: AuthFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.auth_fragment, container, false)
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         return binding.root
     }
 
@@ -48,7 +50,7 @@ class AuthFragment : Fragment() {
             debugger("Refreshed token -> $refreshedToken")
             binding.token = refreshedToken
             if (!refreshedToken.isNullOrEmpty())
-                findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_home)
+                findNavController().navigate(R.id.action_nav_dest_register_to_nav_dest_account_setup)
         })
 
         // observe auth state
@@ -79,13 +81,11 @@ class AuthFragment : Fragment() {
 
         // perform binding
         binding.run {
-            viewModel = this@AuthFragment.viewModel
+            viewModel = this@RegisterFragment.viewModel
+            userName.addTextChangedListener { name = it.toString() }
             userEmail.addTextChangedListener { email = it.toString() }
             userPassword.addTextChangedListener { password = it.toString() }
-
-            register.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_register) }
             executePendingBindings()
         }
     }
-
 }

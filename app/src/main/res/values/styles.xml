@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Search. -->
+    <style name="Widget.Gitly.Search" parent="@style/ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:fillColor">?android:colorBackground</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="itemFillColor">?android:colorBackground</item>
+    </style>
+    <!-- AppBar. -->
+    <style name="ThemeOverlay.Gitly.AppBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:background">?android:colorBackground</item>
+    </style>
+</resources>

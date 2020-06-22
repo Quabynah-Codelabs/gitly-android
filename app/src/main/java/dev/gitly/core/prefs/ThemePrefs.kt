@@ -28,6 +28,13 @@ class ThemePrefs @Inject constructor(context: Context) {
     private val _liveTheme = MutableLiveData<KThemes>()
     val liveTheme: LiveData<KThemes> get() = _liveTheme
 
+    // Get the current theme
+    val currentTheme: KThemes
+        get() = KThemes.valueOf(
+            prefs.getString("key.theme.prefs", KThemes.FOLLOW_SYSTEM.name)
+                ?: KThemes.FOLLOW_SYSTEM.name
+        )
+
     init {
         _liveTheme.value = KThemes.valueOf(
             prefs.getString("key.theme.prefs", KThemes.FOLLOW_SYSTEM.name)

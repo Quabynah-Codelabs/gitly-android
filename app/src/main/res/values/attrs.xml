@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="emphasisLow" format="float" />
+    <attr name="emphasisMid" format="float" />
+    <attr name="emphasisHigh" format="float" />
+</resources>

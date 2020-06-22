@@ -2,21 +2,25 @@
 <resources>
 
     <style name="Type.H3" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="fontFamily">@font/museo_moderno_medium</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <!--        <item name="fontFamily">@font/museo_moderno_medium</item>-->
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
     <style name="Type.H4" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="fontFamily">@font/museo_moderno_medium</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <!--        <item name="fontFamily">@font/museo_moderno_medium</item>-->
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
     <style name="Type.H5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/museo_moderno_medium</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <!--        <item name="fontFamily">@font/museo_moderno_medium</item>-->
     </style>
 
     <style name="Type.H6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/museo_moderno</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <!--        <item name="fontFamily">@font/museo_moderno</item>-->
     </style>
 
     <style name="Type.B1" parent="TextAppearance.MaterialComponents.Body1">

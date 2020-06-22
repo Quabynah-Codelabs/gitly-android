@@ -1,29 +1,25 @@
 package dev.gitly.view.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
+import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
 import dev.gitly.databinding.HomeFragmentBinding
-import dev.gitly.view.adapter.UserLoadStateAdapter
-import dev.gitly.view.adapter.UsersAdapter
+import dev.gitly.debugger
 import dev.gitly.viewmodel.UserViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModels()
-    private val usersAdapter = UsersAdapter()
     private lateinit var binding: HomeFragmentBinding
 
     @Inject
@@ -43,28 +39,64 @@ class HomeFragment : Fragment() {
         // setup binding
         binding.run {
             model = viewModel
-            usersList.run {
-                usersAdapter.withLoadStateHeaderAndFooter(
-                    header = UserLoadStateAdapter { },
-                    footer = UserLoadStateAdapter { }
-                )
-                adapter = usersAdapter
-                setHasFixedSize(false)
-            }
             executePendingBindings()
         }
 
         // observe current user
         viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+            debugger("Signed in as ${user?.name}")
             binding.currentUser = user
         })
 
-        lifecycleScope.launch {
-            viewModel.getUsersStream().collectLatest {
-                usersAdapter.submitData(it)
-            }
-        }
-
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val themeMenuItem = menu.findItem(R.id.menu_item_theme)
+        themePrefs.liveTheme.observe(viewLifecycleOwner, { theme ->
+            themeMenuItem?.icon = when (theme) {
+                KThemes.FOLLOW_SYSTEM -> ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.ic_twotone_follow_system,
+                    null
+                )
+                KThemes.DARK -> ResourcesCompat.getDrawable(
+                    resources, R.drawable.ic_twotone_toggle_day, null
+                )
+                KThemes.LIGHT -> ResourcesCompat.getDrawable(
+                    resources, R.drawable.ic_twotone_toggle_night, null
+                )
+                else -> ResourcesCompat.getDrawable(
+                    resources, R.drawable.ic_twotone_toggle_night, null
+                )
+            }
+        })
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        return inflater.inflate(R.menu.menu_home, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_item_more -> {
+                // show bottom sheet or new page
+                true
+            }
+            R.id.menu_item_search -> {
+                findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search)
+                true
+            }
+            R.id.menu_item_theme -> {
+                // toggle theme
+                when (themePrefs.currentTheme) {
+                    KThemes.LIGHT -> themePrefs.updateTheme(KThemes.DARK)
+                    KThemes.DARK -> themePrefs.updateTheme(KThemes.LIGHT)
+                    KThemes.FOLLOW_SYSTEM -> themePrefs.updateTheme(KThemes.DARK)
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

@@ -4,4 +4,7 @@
     <item name="nav_dest_auth" type="id" />
     <item name="nav_dest_home" type="id" />
     <item name="nav_dest_repo" type="id" />
+    <item name="nav_dest_search" type="id" />
+    <item name="nav_dest_account_setup" type="id" />
+    <item name="nav_dest_register" type="id" />
 </resources>

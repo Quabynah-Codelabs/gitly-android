@@ -9,4 +9,6 @@
     <dimen name="small_logo_height">120dp</dimen>
     <dimen name="large_avatar_size">96dp</dimen>
     <dimen name="spacing_small">4dp</dimen>
+    <dimen name="collapsing_toolbar_height_expanded">230dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

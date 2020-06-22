@@ -26,8 +26,12 @@ class UserViewModel @ViewModelInject constructor(
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> get() = _currentUser
 
+    init {
+        viewCurrentUserProfile()
+    }
+
     // Get the current user
-    fun viewCurrentUserProfile() {
+    private fun viewCurrentUserProfile() {
         viewModelScope.launch {
             repository.viewProfile { cb ->
                 if (cb == null) return@viewProfile
