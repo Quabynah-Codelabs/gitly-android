@@ -1,4 +1,4 @@
-package dev.gitly.widget;
+package dev.gitly.view.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -15,12 +15,16 @@ class DeserializeJson {
     @Test
     fun deserialize() {
         val context = InstrumentationRegistry.getInstrumentation().context
-        with(Gson()) {
-            val fromJson = this.fromJson(
-                InputStreamReader(context.assets.open("sample_users.json")),
-                object : TypeToken<List<User>>() {}.rawType
-            )
-            print(fromJson)
+        try {
+            with(Gson()) {
+                val fromJson = this.fromJson<List<User>>(
+                    InputStreamReader(context.assets.open("sample_users.json")),
+                    object : TypeToken<List<User>>() {}.rawType
+                )
+                print(fromJson)
+            }
+        } catch (e: Exception) {
+            print(e.localizedMessage)
         }
     }
 

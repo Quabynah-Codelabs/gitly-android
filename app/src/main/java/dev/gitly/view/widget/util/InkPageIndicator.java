@@ -1,4 +1,4 @@
-package dev.gitly.widget.util;
+package dev.gitly.view.widget.util;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

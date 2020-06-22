@@ -1,4 +1,4 @@
-package dev.gitly.widget;
+package dev.gitly.view.widget;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.gitly.R;
-import dev.gitly.widget.util.AnimUtils;
-import dev.gitly.widget.util.ColorUtils;
-import dev.gitly.widget.util.ViewUtils;
+import dev.gitly.view.widget.util.AnimUtils;
+import dev.gitly.view.widget.util.ColorUtils;
+import dev.gitly.view.widget.util.ViewUtils;
 
 /**
  * A {@link FrameLayout} which responds to nested scrolls to create drag-dismissable layouts.

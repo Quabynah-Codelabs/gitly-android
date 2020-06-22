@@ -64,7 +64,7 @@
                 style="?materialButtonOutlinedStyle"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:text="@string/login_as_guest"
                 android:visibility="@{userId == null ? View.VISIBLE : View.GONE, default=`gone`}"
                 tools:visibility="visible" />

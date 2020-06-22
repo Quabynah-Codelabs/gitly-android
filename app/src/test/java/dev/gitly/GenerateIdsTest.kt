@@ -1,6 +1,5 @@
 package dev.gitly
 
-import kotlinx.coroutines.delay
 import org.junit.Test
 import java.util.*
 

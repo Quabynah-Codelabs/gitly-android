@@ -1,4 +1,4 @@
-package dev.gitly.widget.util;
+package dev.gitly.view.widget.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -24,7 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
-import dev.gitly.widget.util.compat.ImageViewCompat;
+import dev.gitly.view.widget.util.compat.ImageViewCompat;
 
 /**
  * Utility methods for working with Views.

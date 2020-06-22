@@ -1,4 +1,4 @@
-package dev.gitly.widget.util.compat;
+package dev.gitly.view.widget.util.compat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
