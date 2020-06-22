@@ -7,17 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.BuildConfig
 import dev.gitly.R
+import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.HtmlUtils
 import dev.gitly.databinding.WelcomeFragmentBinding
+import dev.gitly.viewmodel.AuthViewModel
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WelcomeFragment : Fragment() {
 
     private lateinit var binding: WelcomeFragmentBinding
+    private val authViewModel by viewModels<AuthViewModel>()
+
+    @Inject
+    lateinit var authPrefs: AuthPrefs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +40,8 @@ class WelcomeFragment : Fragment() {
 
         // setup binding
         binding.run {
+            token = authPrefs.token
+
             val md = Bypass(requireContext(), Bypass.Options())
             val privacyMessage =
                 md.markdownToSpannable(
@@ -41,7 +51,20 @@ class WelcomeFragment : Fragment() {
                 )
             HtmlUtils.setTextWithNiceLinks(privacyLink, privacyMessage)
 
-            getStarted.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_welcome_to_nav_dest_auth) }
+            getStarted.setOnClickListener {
+                findNavController().navigate(
+                    if (authPrefs.token.isNullOrEmpty()) R.id.action_nav_dest_welcome_to_nav_dest_register
+                    else
+                        R.id.action_nav_dest_welcome_to_nav_dest_home
+                )
+            }
+
+            guestMode.setOnClickListener {
+                authViewModel.logout()
+                authPrefs.token = BuildConfig.GUEST_TOKEN
+                findNavController().navigate(R.id.action_nav_dest_welcome_to_nav_dest_home)
+            }
+
 
             executePendingBindings()
         }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Gitly</string>
-    <string name="login_header">Easy way to connect to mentor &amp; get advise/solutions of programming &amp; design</string>
+    <string name="login_header">Easy way to connect to your mentors &amp; get some pro tips on programming &amp; design</string>
     <string name="email">Email address</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -8,7 +8,7 @@
     <string name="logout">Logout</string>
     <string name="explore">Explore</string>
     <string name="store_link">[Update now](https://play.google.com/store/apps/details?id=dev.gitly)</string>
-    <string name="register">Sign up instead</string>
+    <string name="login_instead">Sign in instead</string>
     <string name="login_title">Get connected to the best</string>
     <string name="username">Full Name</string>
     <string name="sign_in">Sign In</string>
@@ -30,4 +30,7 @@
     <string name="sign_up">Sign up</string>
     <string name="provide_your">Provide your</string>
     <string name="details">details</string>
+    <string name="tell_us">Tell us your</string>
+    <string name="expertise">expertise</string>
+    <string name="login_as_guest">Skip for now</string>
 </resources>

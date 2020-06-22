@@ -2,15 +2,15 @@
     <!-- Application theme for dark theme. -->
     <style name="Theme.Gitly" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?android:colorBackground</item>
         <item name="android:windowLightStatusBar">false</item>
         <!-- Specs. -->
         <item name="emphasisLow">0.37</item>
@@ -27,10 +27,15 @@
         <item name="textAppearanceSubtitle1">@style/Type.S1</item>
         <item name="textAppearanceSubtitle2">@style/Type.S2</item>
         <item name="textAppearanceOverline">@style/Type.Overline</item>
+        <!-- Indicator. -->
+        <item name="currentPageIndicatorColor">@color/page_indicator_dark_selected</item>
+        <item name="pageIndicatorColor">@color/page_indicator_dark</item>
         <!-- Others. -->
         <item name="collapsedTitleTextAppearance">?textAppearanceHeadline6</item>
         <item name="expandedTitleTextAppearance">?textAppearanceHeadline5</item>
         <item name="appBarLayoutStyle">@style/ThemeOverlay.Gitly.AppBar</item>
+        <item name="materialButtonStyle">@style/Widget.Gitly.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.Gitly.Button.Outlined</item>
     </style>
 
 </resources>

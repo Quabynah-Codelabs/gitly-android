@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- placeholders. -->
+    <array name="loading_placeholders">
+        <item>#ff191919</item>
+        <item>#ff212121</item>
+        <item>#ff232323</item>
+    </array>
+
+    <!-- indicator. -->
+    <color name="page_indicator_dark">#80eeeeee</color>
+    <color name="page_indicator_dark_selected">#ffeeeeee</color>
+</resources>

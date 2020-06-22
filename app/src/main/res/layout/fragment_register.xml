@@ -156,14 +156,25 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_xxlarge"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/spacing_xlarge"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/login"
+                        style="?materialButtonOutlinedStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="3"
+                        android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
+                        android:text="@string/login_instead" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/register"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_large"
+                        android:layout_weight="2"
                         android:enabled="@{authState != AuthState.AUTHENTICATING, default=`true`}"
                         android:onClick="@{() -> viewModel.register(name, email, password)}"
                         android:text="@string/proceed" />

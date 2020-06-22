@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnBackground">@color/black</item>
         <!-- Status bar color. -->
@@ -32,10 +32,15 @@
         <!-- Input. -->
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
         </item>
+        <!-- Indicator. -->
+        <item name="currentPageIndicatorColor">@color/page_indicator_dark_selected</item>
+        <item name="pageIndicatorColor">@color/page_indicator_dark</item>
         <!-- Others. -->
         <item name="collapsedTitleTextAppearance">?textAppearanceHeadline6</item>
         <item name="expandedTitleTextAppearance">?textAppearanceHeadline4</item>
         <item name="appBarLayoutStyle">@style/ThemeOverlay.Gitly.AppBar</item>
+        <item name="materialButtonStyle">@style/Widget.Gitly.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.Gitly.Button.Outlined</item>
     </style>
 
 </resources>

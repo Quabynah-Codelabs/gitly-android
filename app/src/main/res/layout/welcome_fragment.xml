@@ -3,7 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data />
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="token"
+            type="String" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,12 +52,22 @@
                 android:text="@string/login_header"
                 android:textAppearance="?textAppearanceBody2" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/get_started"
-                android:layout_width="@dimen/logo_height"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xxlarge"
-                android:text="@string/get_started" />
+                android:text="@{token == null ? @string/login : @string/get_started, default=`@string/login`}" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/guest_mode"
+                style="?materialButtonOutlinedStyle"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@string/login_as_guest"
+                android:visibility="@{token == null ? View.VISIBLE : View.GONE, default=`gone`}"
+                tools:visibility="visible" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

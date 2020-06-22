@@ -82,8 +82,6 @@ class AuthFragment : Fragment() {
             viewModel = this@AuthFragment.viewModel
             userEmail.addTextChangedListener { email = it.toString() }
             userPassword.addTextChangedListener { password = it.toString() }
-
-            register.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_register) }
             executePendingBindings()
         }
     }

@@ -9,4 +9,18 @@
     <color name="black">#FF010101</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#FF8F8F8F</color>
+
+    <!-- indicator. -->
+    <color name="page_indicator_dark">#80333333</color>
+    <color name="page_indicator_dark_selected">#ff333333</color>
+
+    <!-- placeholders. -->
+    <array name="loading_placeholders">
+        <item>#fff5f5f5</item>
+        <item>#ffeeeeee</item>
+        <item>#ffe0e0e0</item>
+    </array>
+
+    <!-- search. -->
+    <color name="search_background_scrim">#33000000</color>
 </resources>
