@@ -43,7 +43,6 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/Theme.Gitly.Register"
         tools:context=".view.auth.RegisterFragment">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -61,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:elevation="@dimen/z_card"
                 android:gravity="start|center"
+                android:elevation="@dimen/z_card"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/spacing_xxlarge">
 

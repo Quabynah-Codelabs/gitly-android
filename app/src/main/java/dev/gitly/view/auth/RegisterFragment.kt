@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
@@ -49,10 +48,10 @@ class RegisterFragment : Fragment() {
         snackbar = Snackbar.make(binding.root, "Message goes here", Snackbar.LENGTH_LONG)
 
         // observe token change
-        prefs.refreshedToken.observe(viewLifecycleOwner, { refreshedToken ->
-            debugger("Refreshed token -> $refreshedToken")
-            binding.token = refreshedToken
-            if (!refreshedToken.isNullOrEmpty())
+        prefs.refreshedUserId.observe(viewLifecycleOwner, { refreshedUserId ->
+            debugger("Refreshed user id -> $refreshedUserId")
+            binding.token = refreshedUserId
+            if (!refreshedUserId.isNullOrEmpty())
                 findNavController().navigate(R.id.action_nav_dest_register_to_nav_dest_account_setup)
         })
 
@@ -88,6 +87,7 @@ class RegisterFragment : Fragment() {
             userName.addTextChangedListener { name = it.toString() }
             userEmail.addTextChangedListener { email = it.toString() }
             userPassword.addTextChangedListener { password = it.toString() }
+            login.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_register_to_nav_dest_auth) }
             executePendingBindings()
         }
     }

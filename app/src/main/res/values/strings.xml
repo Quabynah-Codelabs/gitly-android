@@ -33,4 +33,6 @@
     <string name="tell_us">Tell us your</string>
     <string name="expertise">expertise</string>
     <string name="login_as_guest">Skip for now</string>
+    <string name="expertise_info">It will help us to provide the best for you</string>
+    <string name="personal_info_desc">Tell us something about yourself</string>
 </resources>

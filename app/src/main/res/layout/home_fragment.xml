@@ -14,8 +14,8 @@
             type="UserViewModel" />
 
         <variable
-            name="currentUser"
-            type="User" />
+            name="userId"
+            type="String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -42,8 +42,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:menu="@menu/menu_home"
-                    app:title="@string/empty" />
+                    app:title="@string/empty"
+                    tools:menu="@menu/menu_home" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:enabled="@{currentUser != null, default=`false`}"
+            android:enabled="@{userId != null, default=`false`}"
             android:text="@string/join_slack"
             app:icon="@drawable/ic_twotone_group" />
 

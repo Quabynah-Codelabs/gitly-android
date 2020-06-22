@@ -38,4 +38,9 @@
         <item name="materialButtonOutlinedStyle">@style/Widget.Gitly.Button.Outlined</item>
     </style>
 
+    <!-- Register Theme. -->
+    <style name="Theme.Gitly.Register">
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

@@ -4,6 +4,11 @@
 
     <data>
 
+        <import type="dev.gitly.model.data.User" />
+
+        <variable
+            name="currentUser"
+            type="User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,15 +50,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:paddingVertical="@dimen/spacing_xlarge">
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_xlarge">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/spacing_xxlarge"
-                    android:text="Complete your registration to increase your chances of meeting the right mentors"
+                    android:text="@string/personal_info_desc"
                     android:textAlignment="center"
-                    android:textAppearance="?textAppearanceBody1"
+                    android:textAppearance="?textAppearanceHeadline6"
                     app:layout_constraintTop_toTopOf="parent" />
 
 

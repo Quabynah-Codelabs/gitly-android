@@ -43,7 +43,6 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/Theme.Gitly.Register"
         tools:context=".view.auth.RegisterFragment">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -51,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:weightSum="5"
+            android:weightSum="6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +70,7 @@
                     android:layout_width="@dimen/large_avatar_size"
                     android:layout_height="@dimen/large_avatar_size"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/logo" />
+                    android:src="@drawable/logo"/>
 
                 <TextView
                     android:id="@+id/login_title"
@@ -97,9 +96,10 @@
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/tablet_width"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="4"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/spacing_xxlarge"

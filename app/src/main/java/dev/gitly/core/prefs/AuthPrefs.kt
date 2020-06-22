@@ -14,11 +14,11 @@ class AuthPrefs @Inject constructor(context: Context) {
     private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }
 
     // live token listener
-    private val _liveToken = MutableLiveData<String?>()
-    val refreshedToken: LiveData<String?> get() = _liveToken
+    private val _liveUserId = MutableLiveData<String?>()
+    val refreshedUserId: LiveData<String?> get() = _liveUserId
 
     init {
-        _liveToken.value = prefs.getString("token", null)
+        _liveUserId.value = prefs.getString("id", null)
     }
 
     // Access token for user
@@ -29,7 +29,6 @@ class AuthPrefs @Inject constructor(context: Context) {
                 putString("token", value)
                 apply()
             }
-            _liveToken.postValue(value)
             field = value
         }
 
@@ -41,16 +40,12 @@ class AuthPrefs @Inject constructor(context: Context) {
                 putString("id", value)
                 apply()
             }
+            _liveUserId.postValue(value)
             field = value
         }
 
     // Sign out current user
     fun logout() {
-        // Alternatively
-        //prefs.edit {
-        //    clear()
-        //    apply()
-        //}
         this.token = null
         this.userId = null
     }

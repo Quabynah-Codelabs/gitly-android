@@ -44,10 +44,10 @@ class AuthFragment : Fragment() {
         snackbar = Snackbar.make(binding.root, "Message goes here", Snackbar.LENGTH_LONG)
 
         // observe token change
-        prefs.refreshedToken.observe(viewLifecycleOwner, { refreshedToken ->
-            debugger("Refreshed token -> $refreshedToken")
-            binding.token = refreshedToken
-            if (!refreshedToken.isNullOrEmpty())
+        prefs.refreshedUserId.observe(viewLifecycleOwner, { refreshedUserId ->
+            debugger("Refreshed user id -> $refreshedUserId")
+            binding.token = refreshedUserId
+            if (!refreshedUserId.isNullOrEmpty())
                 findNavController().navigate(R.id.action_nav_dest_auth_to_nav_dest_home)
         })
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
+import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
 import dev.gitly.databinding.HomeFragmentBinding
@@ -25,6 +26,9 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var themePrefs: ThemePrefs
 
+    @Inject
+    lateinit var authPrefs: AuthPrefs
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,18 +43,21 @@ class HomeFragment : Fragment() {
         // setup binding
         binding.run {
             model = viewModel
+            userId = authPrefs.userId
             executePendingBindings()
         }
 
         // observe current user
         viewModel.currentUser.observe(viewLifecycleOwner, { user ->
             debugger("Signed in as ${user?.name}")
-            binding.currentUser = user
         })
 
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.menu_item_search)?.run {
+            isVisible = !authPrefs.userId.isNullOrEmpty()
+        }
         val themeMenuItem = menu.findItem(R.id.menu_item_theme)
         themePrefs.liveTheme.observe(viewLifecycleOwner, { theme ->
             themeMenuItem?.icon = when (theme) {

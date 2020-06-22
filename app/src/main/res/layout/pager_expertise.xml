@@ -51,9 +51,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/spacing_xxlarge"
-                    android:text="It will help us to provide the best for you"
+                    android:text="@string/expertise_info"
                     android:textAlignment="center"
-                    android:textAppearance="?textAppearanceBody1"
+                    android:textAppearance="?textAppearanceHeadline6"
                     app:layout_constraintTop_toTopOf="parent" />
 
 

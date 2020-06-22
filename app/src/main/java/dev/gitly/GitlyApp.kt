@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
+import dev.gitly.BuildConfig.DEBUG
+import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
 import timber.log.Timber
@@ -25,9 +27,12 @@ class GitlyApp : Application(), Configuration.Provider {
     @Inject
     lateinit var themePrefs: ThemePrefs
 
+    @Inject
+    lateinit var authPrefs: AuthPrefs
+
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Timber.plant(DebugTree())
         } else {
             Timber.plant(CrashReportingTree())
@@ -60,6 +65,11 @@ class GitlyApp : Application(), Configuration.Provider {
                 else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
+    }
+
+    override fun onTerminate() {
+        if (DEBUG) authPrefs.logout()
+        super.onTerminate()
     }
 
     override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()

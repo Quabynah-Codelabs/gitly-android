@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="token"
+            name="userId"
             type="String" />
 
     </data>
@@ -57,7 +57,7 @@
                 android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xxlarge"
-                android:text="@{token == null ? @string/login : @string/get_started, default=`@string/login`}" />
+                android:text="@{userId == null ? @string/login : @string/get_started, default=`@string/login`}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/guest_mode"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/login_as_guest"
-                android:visibility="@{token == null ? View.VISIBLE : View.GONE, default=`gone`}"
+                android:visibility="@{userId == null ? View.VISIBLE : View.GONE, default=`gone`}"
                 tools:visibility="visible" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -75,7 +75,7 @@
             android:id="@+id/privacy_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:paddingVertical="@dimen/spacing_large"
             android:textAppearance="?textAppearanceOverline"
             app:layout_constraintBottom_toBottomOf="parent"

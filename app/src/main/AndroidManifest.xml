@@ -4,7 +4,13 @@
     package="dev.gitly"
     android:installLocation="auto">
 
+    <!-- Permissions. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name="dev.gitly.GitlyApp"
@@ -18,7 +24,17 @@
         android:theme="@style/Theme.Gitly"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="screenLayout|screenSize|orientation"
+            android:description="@string/login_header"
+            android:label="@string/app_name"
+            android:logo="@drawable/logo"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:visibleToInstantApps="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,8 +47,20 @@
                 <data
                     android:host="callback"
                     android:scheme="gitly" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <!-- The BROWSABLE category is required to get links from web pages. -->
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Include the host attribute if you want your app to respond
+                     only to URLs with your app's domain. -->
+                <data
+                    android:host="gitly"
+                    android:path="/"
+                    android:scheme="https" />
+
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 

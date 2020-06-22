@@ -40,7 +40,7 @@ class WelcomeFragment : Fragment() {
 
         // setup binding
         binding.run {
-            token = authPrefs.token
+            userId = authPrefs.userId
 
             val md = Bypass(requireContext(), Bypass.Options())
             val privacyMessage =
@@ -53,7 +53,7 @@ class WelcomeFragment : Fragment() {
 
             getStarted.setOnClickListener {
                 findNavController().navigate(
-                    if (authPrefs.token.isNullOrEmpty()) R.id.action_nav_dest_welcome_to_nav_dest_register
+                    if (authPrefs.userId.isNullOrEmpty()) R.id.action_nav_dest_welcome_to_nav_dest_register
                     else
                         R.id.action_nav_dest_welcome_to_nav_dest_home
                 )
