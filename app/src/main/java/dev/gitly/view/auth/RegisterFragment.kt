@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.databinding.FragmentRegisterBinding
@@ -22,6 +24,7 @@ import javax.inject.Inject
 /**
  * Sign up a new [User]
  */
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
 

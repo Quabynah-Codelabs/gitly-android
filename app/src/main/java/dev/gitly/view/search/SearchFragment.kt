@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.SearchFragmentBinding
 import dev.gitly.debugger
 import dev.gitly.viewmodel.SearchState
 import dev.gitly.viewmodel.SearchViewModel
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()

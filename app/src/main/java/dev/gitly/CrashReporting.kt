@@ -3,9 +3,8 @@ package dev.gitly
 import android.util.Log
 import timber.log.Timber
 
-
 fun debugger(message: Any?) {
-    if (BuildConfig.DEBUG) Timber.tag("Gitly").d(message?.toString())
+    if (BuildConfig.DEBUG) Timber.tag("GITLY-DEBUGGER").d(message?.toString())
 }
 
 class CrashReportingTree : Timber.Tree() {

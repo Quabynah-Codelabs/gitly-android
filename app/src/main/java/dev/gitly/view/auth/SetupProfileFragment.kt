@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.FragmentSetupProfileBinding
 
 /**
  * Setup account
  */
+@AndroidEntryPoint
 class SetupProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentSetupProfileBinding

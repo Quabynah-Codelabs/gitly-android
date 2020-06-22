@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:weightSum="2"
+            android:weightSum="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,10 +59,9 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="start|center"
                 android:orientation="vertical"
-                android:background="?colorPrimaryVariant"
                 android:paddingHorizontal="@dimen/spacing_xxlarge">
 
                 <ImageView
@@ -77,9 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xlarge"
-                    android:alpha="?emphasisLow"
+                    android:alpha="?emphasisMid"
                     android:gravity="start"
-                    android:textColor="?colorOnPrimary"
                     android:text="@string/app_name"
                     android:textAppearance="?textAppearanceHeadline3" />
 
@@ -88,7 +86,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="?emphasisHigh"
-                    android:textColor="?colorOnPrimary"
                     android:gravity="start"
                     android:text="@string/sign_up"
                     android:textAppearance="?textAppearanceHeadline3" />
@@ -99,7 +96,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/spacing_xxlarge"

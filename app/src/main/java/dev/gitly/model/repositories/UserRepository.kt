@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface UserRepository {
     suspend fun viewProfile(callback: Callback<Result<User>>)
 
-    suspend fun updateProfile(user: User)
+    suspend fun updateProfile(user: User, shouldSave: Boolean = false)
 
     suspend fun deleteAccount(isAdmin: Boolean)
 
@@ -45,9 +45,13 @@ class UserRepositoryImpl @Inject constructor(
             callback(Result.Error("No user found"))
     }
 
-    override suspend fun updateProfile(user: User) {
-        local.updateUser(user)
-        remote.updateUser(user)
+    override suspend fun updateProfile(user: User, shouldSave: Boolean) {
+        if (shouldSave) {
+            local.save(user)
+        } else {
+            local.updateUser(user)
+            remote.updateUser(user)
+        }
     }
 
     override suspend fun deleteAccount(isAdmin: Boolean) {

@@ -11,9 +11,15 @@ interface WebService {
 
     @Headers("Accept: application/json")
     @POST("/oauth")
-    suspend fun getAccessToken(
+    suspend fun login(
         @Body loginRequest: LoginRequest
     ): AccessToken
+
+    @Headers("Accept: application/json")
+    @POST("/api/users")
+    suspend fun signUp(
+        @Body registerRequest: RegisterRequest
+    ): User
 
     @Headers("Accept: application/json")
     @GET("/api/users/me")
@@ -40,6 +46,15 @@ interface WebService {
  * Login request body
  */
 data class LoginRequest(
+    val email: String?,
+    val password: String
+)
+
+/**
+ * Register request body
+ */
+data class RegisterRequest(
+    val name: String?,
     val email: String?,
     val password: String
 )
