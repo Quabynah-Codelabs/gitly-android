@@ -50,18 +50,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
+                android:paddingHorizontal="@dimen/spacing_xxlarge"
                 android:paddingTop="@dimen/spacing_small"
                 android:paddingBottom="@dimen/spacing_xlarge">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/spacing_xxlarge"
                     android:text="@string/personal_info_desc"
                     android:textAlignment="center"
                     android:textAppearance="?textAppearanceHeadline6"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next"
+                    style="?materialButtonOutlinedStyle"
+                    android:layout_width="@dimen/min_button_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/next"
+                    app:icon="@drawable/ic_twotone_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

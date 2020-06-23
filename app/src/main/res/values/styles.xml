@@ -12,6 +12,29 @@
         <item name="android:paddingBottom">@dimen/spacing_large</item>
         <item name="strokeColor">?colorSecondaryVariant</item>
         <item name="android:textColor">?colorSecondaryVariant</item>
+        <item name="iconGravity">end</item>
+        <item name="iconTint">?colorSecondaryVariant</item>
+    </style>
+
+    <!-- Chips. -->
+    <style name="Widget.Gitly.Chip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipIconVisible">true</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearance.MaterialComponents.SmallComponent
+        </item>
+        <item name="chipIconTint">?colorPrimaryVariant</item>
+        <item name="chipStrokeColor">?pageIndicatorColor</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipEndPadding">@dimen/spacing_normal</item>
+        <item name="chipStartPadding">@dimen/spacing_normal</item>
+        <!-- <item name="chipBackgroundColor">?colorOnPrimary</item> -->
+        <item name="checkedIconTint">?colorPrimaryVariant</item>
+        <item name="android:textColor">?colorPrimaryVariant</item>
+    </style>
+
+    <style name="Widget.Gitly.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="singleLine">true</item>
+        <item name="singleSelection">true</item>
     </style>
 
     <!-- Search. -->

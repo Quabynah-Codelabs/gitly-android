@@ -86,6 +86,7 @@ android {
 
     testOptions {
         unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -174,6 +175,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    testImplementation 'org.mockito:mockito-core:3.3.1'
-    testImplementation 'org.mockito:mockito-android:3.3.1'
+    def mockito_version = "3.3.12"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-android:$mockito_version"
 }

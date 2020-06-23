@@ -36,6 +36,8 @@
         <item name="appBarLayoutStyle">@style/ThemeOverlay.Gitly.AppBar</item>
         <item name="materialButtonStyle">@style/Widget.Gitly.Button</item>
         <item name="materialButtonOutlinedStyle">@style/Widget.Gitly.Button.Outlined</item>
+        <item name="chipGroupStyle">@style/Widget.Gitly.ChipGroup</item>
+        <item name="chipStyle">@style/Widget.Gitly.Chip</item>
     </style>
 
     <!-- Register Theme. -->
