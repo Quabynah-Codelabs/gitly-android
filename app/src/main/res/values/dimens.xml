@@ -16,4 +16,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="z_card">1dp</dimen>
     <dimen name="tablet_width">550dp</dimen>
+    <dimen name="fab_size">48dp</dimen>
 </resources>

@@ -20,6 +20,7 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Gitly.Large</item>
         <!-- Input. -->
         <item name="textInputStyle">@style/Widget.Gitly.Input</item>
+        <item name="autoCompleteTextViewStyle">@style/Widget.Gitly.Input.AutoComplete</item>
         <!-- Specs. -->
         <item name="emphasisLow">0.37</item>
         <item name="emphasisMid">0.67</item>

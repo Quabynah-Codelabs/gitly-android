@@ -12,6 +12,7 @@ import dev.gitly.model.data.User
 import dev.gitly.model.repositories.UserRepository
 import dev.gitly.view.source.UserPagingSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 class UserViewModel @ViewModelInject constructor(
     private val repository: UserRepository
@@ -21,6 +22,8 @@ class UserViewModel @ViewModelInject constructor(
     val currentUser: LiveData<User> get() = repository.getCurrentUser()
 
     private var currentUsersResult: Flow<PagingData<User>>? = null
+
+    fun updateUser(user: User) = viewModelScope.launch { repository.updateProfile(user) }
 
     // Get a stream of users
     fun getUsersStream(): Flow<PagingData<User>> {

@@ -28,6 +28,14 @@ let userSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  designation: {
+    type: String,
+    default: "Android",
+  },
+  country: {
+    type: String,
+    default: "Ghana",
+  },
   isAdmin: {
     type: Boolean,
     default: false,

@@ -31,7 +31,16 @@ router.post(
     return res
       .status(200)
       .send(
-        _.pick(user, ["_id", "name", "email", "timestamp", "isAdmin", "avatar"])
+        _.pick(user, [
+          "_id",
+          "name",
+          "email",
+          "timestamp",
+          "isAdmin",
+          "avatar",
+          "designation",
+          "country",
+        ])
       );
   })
 );
@@ -48,7 +57,16 @@ router.get(
     return res
       .status(200)
       .send(
-        _.pick(user, ["_id", "name", "email", "timestamp", "isAdmin", "avatar"])
+        _.pick(user, [
+          "_id",
+          "name",
+          "email",
+          "timestamp",
+          "isAdmin",
+          "avatar",
+          "designation",
+          "country",
+        ])
       );
   })
 );
@@ -61,8 +79,7 @@ router.post(
     let users = await User.find()
       .skip(req.body.page_size * (req.body.page_index - 1))
       .limit(req.body.page_size);
-      console.log(req.body);
-      
+    console.log(req.body);
 
     // send user data
     return res.status(200).send(users);
@@ -80,14 +97,23 @@ router.put(
     // update user document
     let user = await User.findByIdAndUpdate(
       req.user,
-      _.pick(req.body, ["name", "avatar", "isAdmin"])
+      _.pick(req.body, ["name", "avatar", "isAdmin", "designation", "country"])
     );
 
     // return updated user
     return res
       .status(200)
       .send(
-        _.pick(user, ["_id", "name", "email", "timestamp", "isAdmin", "avatar"])
+        _.pick(user, [
+          "_id",
+          "name",
+          "email",
+          "timestamp",
+          "isAdmin",
+          "avatar",
+          "designation",
+          "country",
+        ])
       );
   })
 );

@@ -14,9 +14,11 @@
         <variable
             name="name"
             type="String" />
+
         <variable
             name="userCountry"
             type="String" />
+
         <variable
             name="userDesignation"
             type="String" />
@@ -86,49 +88,93 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/country_details"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:hint="@string/country_hint"
-                app:errorEnabled="true"
                 app:layout_constraintEnd_toStartOf="@id/body_right_guideline"
                 app:layout_constraintStart_toEndOf="@id/body_left_guideline"
-                app:layout_constraintTop_toBottomOf="@id/designation_details">
+                app:layout_constraintTop_toBottomOf="@id/designation_container">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/country"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/country_details"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_twotone_drop_down"
-                    android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                    android:text="@{currentUser.country, default=`@string/default_country`}"
-                    tools:text="@sample/users.json/users/country" />
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:enabled="false"
+                    android:gravity="center_vertical"
+                    android:hint="@string/country_hint"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toStartOf="@id/fab_edit_country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_twotone_drop_down"
+                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                        android:text="@{currentUser.country, default=`@string/default_country`}"
+                        tools:text="@sample/users.json/users/country" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/designation_details"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/fab_edit_country"
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="@dimen/fab_size"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_twotone_edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/country_details" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/designation_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:hint="@string/designation_hint"
-                app:errorEnabled="true"
                 app:layout_constraintEnd_toStartOf="@id/body_right_guideline"
                 app:layout_constraintStart_toEndOf="@id/body_left_guideline"
                 app:layout_constraintTop_toBottomOf="@id/username_details">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/designation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_twotone_drop_down"
-                    android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                    android:text="@{currentUser.designation}"
-                    tools:text="@sample/users.json/users/designation" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/designation_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/designation_hint"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toStartOf="@id/fab_edit_designation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/designation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_twotone_drop_down"
+                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                        android:text="@{currentUser.designation}"
+                        tools:text="@sample/users.json/users/designation" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/fab_edit_designation"
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="@dimen/fab_size"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_twotone_edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/designation_details" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/next"
@@ -175,7 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.95" />
+            app:layout_constraintGuide_percent="0.92" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

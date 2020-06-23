@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
@@ -53,7 +55,7 @@ class SetupProfileFragment : Fragment() {
         userViewModel.currentUser.observe(viewLifecycleOwner, { user ->
             debugger("Observing profile for ${user?.name}")
 
-            binding.pager.adapter = SetupPagerAdapter(this, user, categoryViewModel)
+            binding.pager.adapter = SetupPagerAdapter(this, user, categoryViewModel, userViewModel)
             binding.indicator.setViewPager(binding.pager)
         })
 
@@ -70,7 +72,8 @@ class SetupProfileFragment : Fragment() {
     internal class SetupPagerAdapter(
         private val host: SetupProfileFragment,
         private val user: User?,
-        private val categoryViewModel: CategoryViewModel
+        private val categoryViewModel: CategoryViewModel,
+        private val userViewModel: UserViewModel
     ) : PagerAdapter() {
         private val context = host.requireContext()
         private val inflater by lazy { LayoutInflater.from(context) }
@@ -102,10 +105,22 @@ class SetupProfileFragment : Fragment() {
                     binding.run {
                         currentUser = user
                         next.run {
-                            isEnabled =
-                                userCountry != null && userDesignation != null && name != null
+
                             setOnClickListener {
-                                host.binding.pager.currentItem = 1
+                                if (userCountry != null && userDesignation != null && name != null) {
+                                    if (user != null) userViewModel.updateUser(
+                                        user.copy(
+                                            name = name ?: "",
+                                            country = userCountry,
+                                            designation = userDesignation
+                                        )
+                                    )
+                                    host.binding.pager.currentItem = 1
+                                } else
+                                    Snackbar.make(
+                                        binding.root, "Fill in your details first",
+                                        Snackbar.LENGTH_SHORT
+                                    ).show()
                             }
                         }
 
@@ -114,6 +129,56 @@ class SetupProfileFragment : Fragment() {
                         userCountry = user?.country ?: context.getString(R.string.default_country)
                         userDesignation = user?.designation
 
+                        // countries
+                        val countries = arrayOf(
+                            "Ghana",
+                            "France",
+                            "Brazil",
+                            "Nigeria",
+                            "England",
+                            "US",
+                            "South Africa"
+                        )
+                        userCountry = countries[0]
+                        country.setText(userCountry)
+                        fabEditCountry.setOnClickListener {
+                            MaterialAlertDialogBuilder(context).run {
+                                setTitle("Select a country")
+                                setSingleChoiceItems(
+                                    countries,
+                                    countries.indexOf(userCountry)
+                                ) { dialog, which ->
+                                    userCountry = countries[which]
+                                    country.setText(userCountry)
+                                    dialog.dismiss()
+                                }
+                                setPositiveButton("Dismiss") { d, _ -> d.dismiss() }
+                                show()
+                            }
+                        }
+
+                        // designations
+                        categoryViewModel.allCategories.observeForever { items ->
+                            val designations = items.map { value -> value.name }.toTypedArray()
+                            userDesignation = designations[0]
+                            designation.setText(userDesignation)
+                            fabEditDesignation.setOnClickListener {
+                                MaterialAlertDialogBuilder(context).run {
+                                    setTitle("Select your designation")
+                                    setSingleChoiceItems(
+                                        designations,
+                                        designations.indexOf(userDesignation)
+                                    ) { dialog, which ->
+                                        userDesignation = designations[which]
+                                        designation.setText(userDesignation)
+                                        dialog.dismiss()
+                                    }
+                                    setPositiveButton("Dismiss") { d, _ -> d.dismiss() }
+                                    show()
+                                }
+                            }
+                        }
+
                         // two-way binding
                         userName.addTextChangedListener {
                             if (!it.isNullOrEmpty()) name = it.toString()
@@ -121,6 +186,7 @@ class SetupProfileFragment : Fragment() {
                         country.addTextChangedListener {
                             if (!it.isNullOrEmpty()) userCountry = it.toString()
                         }
+
                         designation.addTextChangedListener {
                             if (!it.isNullOrEmpty()) userDesignation = it.toString()
                         }
