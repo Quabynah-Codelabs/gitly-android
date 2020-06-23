@@ -1,13 +1,14 @@
 package dev.gitly.view.auth
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
@@ -17,7 +18,8 @@ import dev.gitly.databinding.PagerExpertiseBinding
 import dev.gitly.databinding.PagerPersonalInfoBinding
 import dev.gitly.debugger
 import dev.gitly.model.data.User
-import dev.gitly.viewmodel.AuthViewModel
+import dev.gitly.view.adapter.CategoryListAdapter
+import dev.gitly.viewmodel.CategoryViewModel
 import dev.gitly.viewmodel.UserViewModel
 import javax.inject.Inject
 
@@ -27,9 +29,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SetupProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentSetupProfileBinding
-    private val authViewModel by viewModels<AuthViewModel>()
+    lateinit var binding: FragmentSetupProfileBinding
     private val userViewModel by viewModels<UserViewModel>()
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     @Inject
     lateinit var authPrefs: AuthPrefs
@@ -51,7 +53,7 @@ class SetupProfileFragment : Fragment() {
         userViewModel.currentUser.observe(viewLifecycleOwner, { user ->
             debugger("Observing profile for ${user?.name}")
 
-            binding.pager.adapter = SetupPagerAdapter(requireContext(), user)
+            binding.pager.adapter = SetupPagerAdapter(this, user, categoryViewModel)
             binding.indicator.setViewPager(binding.pager)
         })
 
@@ -65,10 +67,12 @@ class SetupProfileFragment : Fragment() {
         }
     }
 
-    class SetupPagerAdapter(
-        private val context: Context,
-        private val user: User?
+    internal class SetupPagerAdapter(
+        private val host: SetupProfileFragment,
+        private val user: User?,
+        private val categoryViewModel: CategoryViewModel
     ) : PagerAdapter() {
+        private val context = host.requireContext()
         private val inflater by lazy { LayoutInflater.from(context) }
 
         override fun isViewFromObject(view: View, `object`: Any): Boolean = view == `object`
@@ -97,6 +101,30 @@ class SetupProfileFragment : Fragment() {
                     // bind here
                     binding.run {
                         currentUser = user
+                        next.run {
+                            isEnabled =
+                                userCountry != null && userDesignation != null && name != null
+                            setOnClickListener {
+                                host.binding.pager.currentItem = 1
+                            }
+                        }
+
+                        // set init values
+                        name = user?.name
+                        userCountry = user?.country ?: context.getString(R.string.default_country)
+                        userDesignation = user?.designation
+
+                        // two-way binding
+                        userName.addTextChangedListener {
+                            if (!it.isNullOrEmpty()) name = it.toString()
+                        }
+                        country.addTextChangedListener {
+                            if (!it.isNullOrEmpty()) userCountry = it.toString()
+                        }
+                        designation.addTextChangedListener {
+                            if (!it.isNullOrEmpty()) userDesignation = it.toString()
+                        }
+
                         executePendingBindings()
                     }
                     pageOne
@@ -112,6 +140,17 @@ class SetupProfileFragment : Fragment() {
 
                     // bind here
                     binding.run {
+                        done.setOnClickListener {
+                            host.findNavController()
+                                .navigate(R.id.action_nav_dest_account_setup_to_nav_dest_home)
+                        }
+                        categoryViewModel.allCategories.observeForever { items ->
+                            categoryGrid.run {
+                                adapter = CategoryListAdapter(categoryViewModel).apply {
+                                    submitList(items)
+                                }
+                            }
+                        }
 
                         executePendingBindings()
                     }
@@ -119,7 +158,6 @@ class SetupProfileFragment : Fragment() {
                 }
             }
         }
-
 
     }
 }

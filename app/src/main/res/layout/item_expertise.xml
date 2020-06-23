@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="dev.gitly.viewmodel.CategoryViewModel" />
+
+        <import type="dev.gitly.model.data.Category" />
+
+        <variable
+            name="viewModel"
+            type="CategoryViewModel" />
+
+        <variable
+            name="category"
+            type="Category" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/feature_card_height"
+        android:checkable="true"
+        app:cardElevation="@dimen/z_card"
+        app:checkedIconTint="?android:colorBackground"
+        android:onClick="@{() -> viewModel.updateCategory(category)}"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@{category.id}"
+            android:padding="@dimen/spacing_large">
+
+            <TextView
+                android:id="@+id/category_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:paddingVertical="@dimen/spacing_small"
+                android:text="@{category.name}"
+                android:textAppearance="?textAppearanceBody1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@sample/categories.json/categories/name" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

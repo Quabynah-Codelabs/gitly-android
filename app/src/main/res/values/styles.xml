@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Cards. -->
+    <style name="Widget.Gitly.Card" parent="Widget.MaterialComponents.CardView">
+<!--        <item name="cardBackgroundColor">?pageIndicatorColor</item>-->
+<!--        <item name="android:alpha">?emphasisLow</item>-->
+    </style>
+
     <!-- Buttons. -->
     <style name="Widget.Gitly.Button" parent="@style/Widget.MaterialComponents.Button">
         <item name="android:paddingTop">@dimen/spacing_large</item>
+        <item name="iconGravity">end</item>
         <item name="android:paddingBottom">@dimen/spacing_large</item>
     </style>
 
@@ -14,6 +21,11 @@
         <item name="android:textColor">?colorSecondaryVariant</item>
         <item name="iconGravity">end</item>
         <item name="iconTint">?colorSecondaryVariant</item>
+    </style>
+
+    <!-- Input. -->
+    <style name="Widget.Gitly.Input" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="shapeAppearance">@style/ShapeAppearance.Gitly.Small.Input</item>
     </style>
 
     <!-- Chips. -->

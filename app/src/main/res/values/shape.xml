@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Small. -->
+    <style name="ShapeAppearance.Gitly.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/spacing_xxlarge</item>
+    </style>
+
+    <!-- Medium. -->
+    <style name="ShapeAppearance.Gitly.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/spacing_large</item>
+    </style>
+
+    <!-- Large. -->
+    <style name="ShapeAppearance.Gitly.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <!-- Input. -->
+    <style name="ShapeAppearance.Gitly.Small.Input">
+        <item name="cornerSize">@dimen/spacing_large</item>
+    </style>
+</resources>

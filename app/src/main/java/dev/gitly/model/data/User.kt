@@ -16,5 +16,7 @@ data class User(
     val email: String,
     var name: String,
     var avatar: String? = null,
+    var country: String? = null,
+    var designation: String? = null,
     @field:SerializedName("createdOn") val timestamp: Long = System.currentTimeMillis()
 ) : Parcelable

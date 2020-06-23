@@ -5,15 +5,9 @@ import androidx.hilt.Assisted
 import androidx.hilt.work.WorkerInject
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import dev.gitly.debugger
-import dev.gitly.model.data.User
 import dev.gitly.model.sources.local.database.GitlyLocalDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.io.InputStreamReader
 
 /**
  * Worker for loading sample data into the database
@@ -26,16 +20,17 @@ class SampleDataWorker @WorkerInject constructor(
 
     override suspend fun doWork(): Result {
 
+        // todo: load some sample data from server
         return try {
-            withContext(Dispatchers.IO) {
+            /*withContext(Dispatchers.IO) {
                 with(Gson()) {
                     val fromJson = fromJson<List<User>>(
-                        InputStreamReader(context.assets.open("sample_users.json")),
+                        InputStreamReader(context.assets.open("sampledata/users.json")),
                         object : TypeToken<List<User>>() {}.type
                     )
                     database.userDao().insertAll(fromJson.toMutableList())
                 }
-            }
+            }*/
             Result.success()
         } catch (ex: IOException) {
             debugger("Adding sample users exited with error -> ${ex.localizedMessage}")

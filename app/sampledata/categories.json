@@ -1,0 +1,41 @@
+{
+  "comment": "Sample categories for testing",
+  "categories": [
+    {
+      "id": "flutter",
+      "name": "Flutter",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "id": "web",
+      "name": "Web",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "id": "android",
+      "name": "Android",
+      "icon": "",
+      "isEnabled": true
+    },
+    {
+      "id": "machine_learning",
+      "name": "Machine Learning",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "id": "ios",
+      "name": "iOS",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "id": "ui_ux_designer",
+      "name": "UI/UX Designer",
+      "icon": "",
+      "isEnabled": false
+    }
+  ]
+}

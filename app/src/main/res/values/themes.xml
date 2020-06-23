@@ -16,6 +16,10 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <!-- Shapes. -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Gitly.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Gitly.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Gitly.Large</item>
         <!-- Specs. -->
         <item name="emphasisLow">0.37</item>
         <item name="emphasisMid">0.67</item>
@@ -32,8 +36,7 @@
         <item name="textAppearanceSubtitle2">@style/Type.S2</item>
         <item name="textAppearanceOverline">@style/Type.Overline</item>
         <!-- Input. -->
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
-        </item>
+        <item name="textInputStyle">@style/Widget.Gitly.Input</item>
         <!-- Indicator. -->
         <item name="currentPageIndicatorColor">@color/page_indicator_dark_selected</item>
         <item name="pageIndicatorColor">@color/page_indicator_dark</item>
@@ -42,6 +45,7 @@
         <item name="expandedTitleTextAppearance">?textAppearanceHeadline4</item>
         <item name="appBarLayoutStyle">@style/ThemeOverlay.Gitly.AppBar</item>
         <item name="materialButtonStyle">@style/Widget.Gitly.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.Gitly.Card</item>
         <item name="materialButtonOutlinedStyle">@style/Widget.Gitly.Button.Outlined</item>
         <item name="chipGroupStyle">@style/Widget.Gitly.ChipGroup</item>
         <item name="chipStyle">@style/Widget.Gitly.Chip</item>
