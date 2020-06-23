@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dev.gitly.debugger
 import javax.inject.Inject
 
 /**
@@ -18,7 +19,7 @@ class AuthPrefs @Inject constructor(context: Context) {
     val refreshedUserId: LiveData<String?> get() = _liveUserId
 
     init {
-        _liveUserId.value = prefs.getString("id", null)
+        _liveUserId.postValue(prefs.getString("id", null))
     }
 
     // Access token for user
@@ -46,6 +47,7 @@ class AuthPrefs @Inject constructor(context: Context) {
 
     // Sign out current user
     fun logout() {
+        debugger("Signing out...")
         this.token = null
         this.userId = null
     }
