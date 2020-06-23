@@ -1,15 +1,20 @@
 package dev.gitly
 
-import androidx.test.core.app.ApplicationProvider
+import android.content.Context
 import dev.gitly.core.prefs.AuthPrefs
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
+// https://proandroiddev.com/how-to-unit-test-code-with-coroutines-50c1640f6bef
 @RunWith(MockitoJUnitRunner::class)
 class AuthenticationTest {
+
+    @Mock
+    private lateinit var mockContext: Context
 
     lateinit var authPrefs: AuthPrefs
 
@@ -18,13 +23,11 @@ class AuthenticationTest {
         MockitoAnnotations.initMocks(this)
 
         // init prefs
-        authPrefs = AuthPrefs(ApplicationProvider.getApplicationContext())
+        authPrefs = AuthPrefs(mockContext)
     }
 
     @Test
     fun verifyLoginState() {
-//        `when`(authPrefs.logout()).thenReturn(debugger("Logged out"))
-//        verify(authPrefs).logout()
         authPrefs.logout()
     }
 }

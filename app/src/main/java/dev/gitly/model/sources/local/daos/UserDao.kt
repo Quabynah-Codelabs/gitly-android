@@ -17,7 +17,7 @@ interface UserDao : BaseDao<User> {
     // fun getLiveUsersIndexed(pageIndex: Int = 0, pageSize: Int = 10): LiveData<List<User>>
 
     @Query("select * from users where id is :id order by id desc")
-    suspend fun getUser(id: String?): User?
+    fun getUser(id: String?): LiveData<User>
 
     @Query("delete from users where id is :id")
     suspend fun delete(id: String?)

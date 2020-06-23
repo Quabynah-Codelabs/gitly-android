@@ -39,8 +39,8 @@ class UserRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUserById(id: String): User? {
-        return withContext(Dispatchers.IO) {
+    override suspend fun getUserById(id: String): User? =
+        withContext(Dispatchers.IO) {
             try {
                 service.getUserById(id)
             } catch (e: Exception) {
@@ -48,7 +48,6 @@ class UserRemoteDataSourceImpl @Inject constructor(
                 null
             }
         }
-    }
 
     override suspend fun updateUser(user: User) {
         return withContext(Dispatchers.IO) {
@@ -60,24 +59,22 @@ class UserRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteUser() {
-        return withContext(Dispatchers.IO) {
+    override suspend fun deleteUser() =
+        withContext(Dispatchers.IO) {
             try {
                 service.deleteUser(prefs.userId)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
             }
         }
-    }
 
-    override suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User> {
-        return withContext(Dispatchers.IO) {
+    override suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User> =
+        withContext(Dispatchers.IO) {
             try {
                 service.requestMentors(PagingRequest(pageIndex, pageSize))
             } catch (e: Exception) {
                 listOf()
             }
         }
-    }
 
 }

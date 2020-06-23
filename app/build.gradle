@@ -176,6 +176,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     testImplementation "androidx.paging:paging-common-ktx:$paging_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
     def mockito_version = "3.3.3"
     testImplementation "org.mockito:mockito-core:$mockito_version"

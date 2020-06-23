@@ -19,7 +19,7 @@ class AuthPrefs @Inject constructor(context: Context) {
     val refreshedUserId: LiveData<String?> get() = _liveUserId
 
     init {
-        _liveUserId.postValue(prefs.getString("id", null))
+        _liveUserId.postValue(prefs?.getString("id", null))
     }
 
     // Access token for user

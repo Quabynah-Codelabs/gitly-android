@@ -1,15 +1,17 @@
 package dev.gitly.model.repositories
 
 import androidx.hilt.Assisted
-import dev.gitly.core.util.Callback
-import dev.gitly.core.util.Result
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import dev.gitly.model.data.User
 import dev.gitly.model.sources.local.UserLocalDataSource
 import dev.gitly.model.sources.remote.UserRemoteDataSource
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 interface UserRepository {
-    suspend fun viewProfile(callback: Callback<Result<User>>)
+
+    fun getCurrentUser(): LiveData<User>
 
     suspend fun updateProfile(user: User, shouldSave: Boolean = false)
 
@@ -17,7 +19,7 @@ interface UserRepository {
 
     suspend fun getUsers(pageIndex: Int, pageSize: Int): List<User>
 
-    suspend fun getUserById(id: String): User?
+    fun getUserById(id: String): LiveData<User>
 }
 
 /**
@@ -28,21 +30,15 @@ class UserRepositoryImpl @Inject constructor(
     @Assisted private val remote: UserRemoteDataSource
 ) : UserRepository {
 
-    override suspend fun viewProfile(callback: Callback<Result<User>>) {
-        callback(Result.Loading)
-
-        // fetch from cache
-        val localUser = local.getCurrentUser()
-        if (localUser != null) callback(Result.Success(localUser))
+    override fun getCurrentUser(): LiveData<User> = liveData {
+        emitSource(local.getCurrentUser())
 
         // fetch from server
         val remoteUser = remote.getCurrentUser()
         if (remoteUser != null) {
             // update cache
             local.updateUser(remoteUser)
-            callback(Result.Success(remoteUser))
-        } else
-            callback(Result.Error("No user found"))
+        }
     }
 
     override suspend fun updateProfile(user: User, shouldSave: Boolean) {
@@ -66,10 +62,10 @@ class UserRepositoryImpl @Inject constructor(
         return local.getUsers(pageIndex, pageSize)
     }
 
-    override suspend fun getUserById(id: String): User? {
+    override fun getUserById(id: String): LiveData<User> = liveData {
+        emitSource(local.getUserById(id))
         val user = remote.getUserById(id)
         if (user != null) local.save(user)
-        return local.getUserById(id)
     }
 
 }
