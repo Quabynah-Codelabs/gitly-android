@@ -21,7 +21,7 @@ import java.io.InputStreamReader
 import javax.inject.Singleton
 
 @Singleton
-@Database(entities = [User::class, Category::class], version = 2, exportSchema = true)
+@Database(entities = [User::class, Category::class], version = 3, exportSchema = true)
 abstract class GitlyLocalDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun categoryDao(): CategoryDao
@@ -84,7 +84,7 @@ abstract class GitlyLocalDatabase : RoomDatabase() {
 
                                 }
                             })
-                            .fallbackToDestructiveMigrationOnDowngrade()
+                            .fallbackToDestructiveMigration()
                             .addMigrations(object : Migration(1, 2) {
                                 override fun migrate(database: SupportSQLiteDatabase) {
                                     // updated user class with `country` & `designation`

@@ -5,7 +5,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="get_user">Get profile</string>
-    <string name="logout">Logout</string>
     <string name="explore">Explore</string>
     <string name="store_link">[Update now](https://play.google.com/store/apps/details?id=dev.gitly)</string>
     <string name="login_instead">Sign in instead</string>
@@ -42,4 +41,5 @@
     <string name="intermediate">Mid-Level</string>
     <string name="experience_none">I\'d rather not say</string>
     <string name="expert">Expert</string>
+    <string name="logout">Logout</string>
 </resources>

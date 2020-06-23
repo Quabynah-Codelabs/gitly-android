@@ -6,7 +6,6 @@ import androidx.lifecycle.liveData
 import dev.gitly.model.data.User
 import dev.gitly.model.sources.local.UserLocalDataSource
 import dev.gitly.model.sources.remote.UserRemoteDataSource
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 interface UserRepository {
@@ -35,9 +34,10 @@ class UserRepositoryImpl @Inject constructor(
 
         // fetch from server
         val remoteUser = remote.getCurrentUser()
+
         if (remoteUser != null) {
             // update cache
-            local.updateUser(remoteUser)
+            local.save(remoteUser)
         }
     }
 

@@ -10,6 +10,7 @@
     <dimen name="button_width">250dp</dimen>
     <dimen name="min_button_width">150dp</dimen>
     <dimen name="small_logo_height">120dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
     <dimen name="large_avatar_size">96dp</dimen>
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="collapsing_toolbar_height_expanded">230dp</dimen>
@@ -17,4 +18,5 @@
     <dimen name="z_card">1dp</dimen>
     <dimen name="tablet_width">550dp</dimen>
     <dimen name="fab_size">48dp</dimen>
+    <dimen name="header_layout_height">250dp</dimen>
 </resources>

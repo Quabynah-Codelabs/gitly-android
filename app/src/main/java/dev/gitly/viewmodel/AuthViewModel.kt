@@ -89,6 +89,7 @@ class AuthViewModel @ViewModelInject constructor(
 
                 // save token
                 authPrefs.token = accessToken.token
+                authPrefs.userId = user.id
 
                 // update UI
                 _authState.postValue(AuthState.AUTHENTICATED)

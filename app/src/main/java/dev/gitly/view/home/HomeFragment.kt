@@ -1,8 +1,10 @@
 package dev.gitly.view.home
 
 import android.os.Bundle
-import android.view.*
-import androidx.core.content.res.ResourcesCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +14,9 @@ import dev.gitly.R
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
+import dev.gitly.databinding.HeaderHomeBinding
 import dev.gitly.databinding.HomeFragmentBinding
+import dev.gitly.debugPrint
 import dev.gitly.debugger
 import dev.gitly.viewmodel.UserViewModel
 import javax.inject.Inject
@@ -22,6 +26,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModels()
     private lateinit var binding: HomeFragmentBinding
+    private lateinit var headerBinding: HeaderHomeBinding
 
     @Inject
     lateinit var themePrefs: ThemePrefs
@@ -34,6 +39,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
+        headerBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.header_home,
+            binding.drawer,
+            false
+        )
         return binding.root
     }
 
@@ -44,66 +55,60 @@ class HomeFragment : Fragment() {
         binding.run {
             model = viewModel
             userId = authPrefs.userId
-            executePendingBindings()
-        }
 
-        // observe current user
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
-            debugger("Signed in as ${user?.name}")
-        })
-
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.menu_item_search)?.run {
-            isVisible = !authPrefs.userId.isNullOrEmpty()
-        }
-        val themeMenuItem = menu.findItem(R.id.menu_item_theme)
-        themePrefs.liveTheme.observe(viewLifecycleOwner, { theme ->
-            themeMenuItem?.icon = when (theme) {
-                KThemes.FOLLOW_SYSTEM -> ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.ic_twotone_follow_system,
-                    null
-                )
-                KThemes.DARK -> ResourcesCompat.getDrawable(
-                    resources, R.drawable.ic_twotone_toggle_day, null
-                )
-                KThemes.LIGHT -> ResourcesCompat.getDrawable(
-                    resources, R.drawable.ic_twotone_toggle_night, null
-                )
-                else -> ResourcesCompat.getDrawable(
-                    resources, R.drawable.ic_twotone_toggle_night, null
-                )
-            }
-        })
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        return inflater.inflate(R.menu.menu_home, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_item_more -> {
-                // show bottom sheet or new page
-                true
-            }
-            R.id.menu_item_search -> {
-                findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search)
-                true
-            }
-            R.id.menu_item_theme -> {
-                // toggle theme
+            moreMenuItem.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search) }
+            searchMenuItem.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search) }
+            themeMenuItem.setOnClickListener {
                 when (themePrefs.currentTheme) {
                     KThemes.LIGHT -> themePrefs.updateTheme(KThemes.DARK)
                     KThemes.DARK -> themePrefs.updateTheme(KThemes.LIGHT)
                     KThemes.FOLLOW_SYSTEM -> themePrefs.updateTheme(KThemes.DARK)
                 }
-                true
             }
-            else -> super.onOptionsItemSelected(item)
+            executePendingBindings()
         }
+
+
+        // observe current user
+        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+            debugger("Signed in as ${user?.name}")
+
+            // setup header
+            headerBinding.run {
+                currentUser = user
+                currentUser.debugPrint()
+                executePendingBindings()
+            }
+        })
+
+        // observe current theme
+        themePrefs.liveTheme.observe(viewLifecycleOwner, { currentTheme ->
+            // update theme icon
+            binding.themeMenuItem.run {
+                when (currentTheme) {
+                    KThemes.LIGHT -> setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_twotone_toggle_night
+                        )
+                    )
+                    KThemes.DARK -> setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_twotone_toggle_day
+                        )
+                    )
+                    KThemes.FOLLOW_SYSTEM -> setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_twotone_follow_system
+                        )
+                    )
+                    else -> themePrefs.updateTheme(KThemes.LIGHT)
+                }
+            }
+        })
+
     }
+
 }

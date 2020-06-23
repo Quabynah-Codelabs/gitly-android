@@ -57,7 +57,7 @@
                 android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xxlarge"
-                android:text="@{userId == null ? @string/login : @string/get_started, default=`@string/login`}" />
+                android:text="@{userId == null ? @string/explore : @string/get_started, default=`@string/explore`}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/guest_mode"
