@@ -50,7 +50,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
         }
 
     override suspend fun updateUser(user: User) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             try {
                 service.updateUserAsync(user)
             } catch (e: Exception) {
@@ -73,7 +73,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
             try {
                 service.requestMentors(PagingRequest(pageIndex, pageSize))
             } catch (e: Exception) {
-                listOf()
+                listOf<User>()
             }
         }
 

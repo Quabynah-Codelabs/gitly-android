@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -50,8 +49,7 @@ class HomeFragment : Fragment() {
 
             moreMenuItem.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_nav_dest_home_to_nav_dest_user,
-                    bundleOf("userId" to authPrefs.userId)
+                    HomeFragmentDirections.actionNavDestHomeToNavDestUser(userId = authPrefs.userId)
                 )
             }
             searchMenuItem.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search) }

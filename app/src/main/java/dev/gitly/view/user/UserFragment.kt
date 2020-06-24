@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.FragmentUserBinding
 import dev.gitly.debugPrint
 import dev.gitly.debugger
-import dev.gitly.model.data.User
 import dev.gitly.viewmodel.UserViewModel
 
 @AndroidEntryPoint
@@ -21,6 +21,7 @@ class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
 
     private val userViewModel by viewModels<UserViewModel>()
+    private val args by navArgs<UserFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +36,15 @@ class UserFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         arguments.debugPrint()
-        val userId: String? = arguments?.get("userId").toString()
-        val user: User? = arguments?.getParcelable("currentUser")
-        if (userId.isNullOrEmpty()) {
+
+        if (args.userId.isNullOrEmpty()) {
             debugger("No user found")
             findNavController().popBackStack()
             return
         }
 
-        userViewModel.getUserById(userId).observe(viewLifecycleOwner, { fetchedUser ->
+        // observe user
+        userViewModel.getUserById(args.userId!!).observe(viewLifecycleOwner, { fetchedUser ->
             binding.run {
                 currentUser = fetchedUser
                 executePendingBindings()

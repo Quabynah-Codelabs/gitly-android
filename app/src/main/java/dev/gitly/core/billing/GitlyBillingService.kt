@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GitlyBillingService constructor(private val context: Activity) {
-    // private val pub_key_base64 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt2bCY39RtmK6Wtmt1Ddfky33mppXG/QmmMQByxtoS3z6ueRMskNdVn9zLTapKkXo+We8cKg6ttKdl0cN7EXs//sRsRc2b/+twYa31dk6DmtJF+FvNFlkW2ebI9IPMCuWQNPTuYKWQ/ljOJudhMpB14Ri6jEAXqdSdzxsl40RQFDDcGsX+LK/sjhsSGNTSGJ+n39fh1dYfDEzyh4u0HUkCML8bLZ7Pkw3X7NX4N8sOI5lmtzHKmdV2IuNiq3WKAq4KVwEB+qAUVtmCL3s0ajLvL7jM1n7uwVHuJ2SYOAz4hlctnUqbU/ETIcYyin26fUWyh6KuZw2GsLxZB0HLyZMiwIDAQAB"
 
     private val skuType = BillingClient.SkuType.INAPP
     private var skuDetails = mutableListOf<SkuDetails>()

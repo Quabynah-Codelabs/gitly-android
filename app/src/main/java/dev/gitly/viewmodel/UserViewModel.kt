@@ -19,7 +19,7 @@ class UserViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     // Live data for current user
-    val currentUser: LiveData<User> by lazy { repository.getCurrentUser() }
+    val currentUser: LiveData<User> = repository.getCurrentUser()
 
     private var currentUsersResult: Flow<PagingData<User>>? = null
 

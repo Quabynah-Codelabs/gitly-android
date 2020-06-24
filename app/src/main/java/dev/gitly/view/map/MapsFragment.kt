@@ -161,7 +161,7 @@ class MapsFragment : Fragment() {
             markerManager = markerManager,
             polygonManager = polygonManager,
             polylineManager = polylineManager,
-            groundOverlayManager = groundOverlayManager,
+            groundOverlayManager = groundOverlayManager
         )
         kmlPolylineLayer.addLayerToMap()
         kmlPolylineLayer.setOnFeatureClickListener { feature ->
@@ -180,7 +180,7 @@ class MapsFragment : Fragment() {
             markerManager = markerManager,
             polygonManager = polygonManager,
             polylineManager = polylineManager,
-            groundOverlayManager = groundOverlayManager,
+            groundOverlayManager = groundOverlayManager
         )
         kmlPolygonLayer.addLayerToMap()
         kmlPolygonLayer.setOnFeatureClickListener { feature ->
