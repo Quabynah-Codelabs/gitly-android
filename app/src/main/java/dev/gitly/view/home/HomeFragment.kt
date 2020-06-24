@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
+import dev.gitly.core.billing.GitlyBillingService
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
@@ -42,6 +43,10 @@ class HomeFragment : Fragment() {
         // setup binding
         binding.run {
             userId = authPrefs.userId
+
+            fab.setOnClickListener {
+                GitlyBillingService(requireActivity())
+            }
 
             moreMenuItem.setOnClickListener {
                 findNavController().navigate(

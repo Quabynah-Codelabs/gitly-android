@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Gitly</string>
+    <string name="app_desc">A mentorship application for newbies</string>
+    <string name="app_desc_long">A mentorship application that helps you develop a relationship &amp; meet people who are already in your field of interest</string>
     <string name="login_header">Easy way to connect to your mentors &amp; get some pro tips on programming &amp; design</string>
     <string name="email">Email address</string>
     <string name="password">Password</string>

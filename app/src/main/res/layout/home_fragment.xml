@@ -132,8 +132,10 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:contentDescription="@string/join_slack"
-            android:enabled="@{userId != null, default=`false`}"
+
             android:src="@drawable/ic_twotone_group" />
+
+<!--        android:enabled="@{userId != null, default=`false`}"-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

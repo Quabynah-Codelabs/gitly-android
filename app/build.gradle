@@ -7,10 +7,19 @@ plugins {
     id "androidx.navigation.safeargs.kotlin"
 }
 
+// Keystore props for app signing
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    //keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    keystorePropertiesFile?.withInputStream { keystoreProperties.load(it) }
+}
+
+// Secure props for API keys
+def secureProps = new Properties()
+def securePropsFile = rootProject.file('secure.properties')
+if (securePropsFile.exists()) {
+    securePropsFile?.withInputStream { secureProps.load(it) }
 }
 
 // query git for the SHA, Tag and commit count. Use these to automate versioning.
@@ -32,6 +41,7 @@ android {
 
         // Field for all builds
         buildConfigField "String", "GUEST_TOKEN", "\"$guest_access_token\""
+        resValue "string", "maps_api_key", (secureProps.getProperty("maps_api_key") ?: "")
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -167,6 +177,19 @@ dependencies {
     // Paging
     def paging_version = "3.0.0-alpha01"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    // Billing
+    def billing_version = "3.0.0"
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
+
+    // Google Auth
+    implementation "com.google.android.gms:play-services-auth:18.0.0"
+
+    // Maps
+    def maps_version = "1.7.0"
+    implementation "com.google.maps.android:maps-ktx:$maps_version"
+    implementation "com.google.maps.android:maps-utils-ktx:$maps_version"
+
 
     // Bypass: HTML link movement
     implementation project(":bypass")

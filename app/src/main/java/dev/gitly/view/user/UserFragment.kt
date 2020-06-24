@@ -20,7 +20,7 @@ class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
 
     private val userViewModel by viewModels<UserViewModel>()
-//    private val args: UserFragmentArgs by navArgs()
+//    private val args by navArgs<>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
