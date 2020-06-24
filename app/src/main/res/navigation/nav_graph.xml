@@ -95,7 +95,15 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_nav_dest_user_to_nav_dest_map"
+            app:destination="@id/nav_dest_map" />
     </fragment>
+    <fragment
+        android:id="@id/nav_dest_map"
+        android:name="dev.gitly.view.map.MapsFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_maps" />
 
 
 </navigation>

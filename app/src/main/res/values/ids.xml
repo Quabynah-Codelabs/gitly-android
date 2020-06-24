@@ -10,4 +10,5 @@
     <item name="nav_dest_user" type="id" />
     <item name="nav_dest_chat" type="id" />
     <item name="nav_dest_mentor" type="id" />
+    <item name="nav_dest_map" type="id" />
 </resources>

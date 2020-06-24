@@ -18,56 +18,14 @@
             android:paddingVertical="@dimen/spacing_large"
             tools:context=".view.search.SearchFragment">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/search_container"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/dismiss"
-                    android:layout_width="?actionBarSize"
-                    android:layout_height="?actionBarSize"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/cd_close_search"
-                    android:src="@drawable/ic_twotone_back" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Gitly.Search"
-                    android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
-                    android:layout_weight="1"
-                    android:hint="@string/search_hint"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/search_query"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textAutoCorrect|textAutoComplete|textCapWords" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/clear"
-                    android:layout_width="?actionBarSize"
-                    android:layout_height="?actionBarSize"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/cd_clear_search"
-                    android:src="@drawable/ic_twotone_close" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/search_result_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/spacing_normal"
                 android:scrollbarStyle="outsideOverlay"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_container" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

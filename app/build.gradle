@@ -189,6 +189,7 @@ dependencies {
     def maps_version = "1.7.0"
     implementation "com.google.maps.android:maps-ktx:$maps_version"
     implementation "com.google.maps.android:maps-utils-ktx:$maps_version"
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
 
     // Bypass: HTML link movement
