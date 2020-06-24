@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="teal_200">#bb86fc</color>
     <!-- placeholders. -->
     <array name="loading_placeholders">
         <item>#ff191919</item>

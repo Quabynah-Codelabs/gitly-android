@@ -47,7 +47,7 @@ class MapsFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             val googleMap = mapFragment?.awaitMap()
             val sydney = LatLng(51.403186, -0.126446)
-            googleMap?.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+            googleMap?.addMarker(MarkerOptions().position(sydney).title("Somewhere in England"))
             googleMap?.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                     requireActivity(),

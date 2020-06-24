@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.FragmentUserBinding
+import dev.gitly.debugPrint
 import dev.gitly.debugger
 import dev.gitly.model.data.User
 import dev.gitly.viewmodel.UserViewModel
@@ -20,7 +21,6 @@ class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
 
     private val userViewModel by viewModels<UserViewModel>()
-//    private val args by navArgs<>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +34,10 @@ class UserFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val userId: String? = arguments?.getString("userId")
+        arguments.debugPrint()
+        val userId: String? = arguments?.get("userId").toString()
         val user: User? = arguments?.getParcelable("currentUser")
-        if (userId.isNullOrEmpty() || user == null) {
+        if (userId.isNullOrEmpty()) {
             debugger("No user found")
             findNavController().popBackStack()
             return

@@ -37,7 +37,7 @@ app.use("/oauth", auth);
 
 // Start connection to MongoDB
 mongoose
-  .connect(/*config.get("gitly_server_url")*/ "mongodb+srv://quabynah:quabynah1993@cluster0-fz8dm.gcp.mongodb.net/gitly?retryWrites=true&w=majority", {
+  .connect(config.get("gitly_server_url")/*"mongodb+srv://quabynah:quabynah1993@cluster0-fz8dm.gcp.mongodb.net/gitly?retryWrites=true&w=majority"*/, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

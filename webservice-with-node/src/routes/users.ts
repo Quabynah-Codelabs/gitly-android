@@ -71,6 +71,32 @@ router.get(
   })
 );
 
+// get user by id
+router.get(
+  "/:id",
+  auth,
+  error(async (req: Request, res: Response) => {
+    let user = await User.findById(req.params.id);
+    if (!user) return res.status(400).send("Invalid user credentials");
+
+    // send user data
+    return res
+      .status(200)
+      .send(
+        _.pick(user, [
+          "_id",
+          "name",
+          "email",
+          "timestamp",
+          "isAdmin",
+          "avatar",
+          "designation",
+          "country",
+        ])
+      );
+  })
+);
+
 // get mentors
 router.post(
   "/mentors",
