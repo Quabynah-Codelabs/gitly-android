@@ -16,8 +16,8 @@ fun loadCircleAvatar(view: ImageView, url: String?, circleCrop: Boolean = false)
         .asBitmap()
         .load(url)
         .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-        .placeholder(R.drawable.avatar)
-        .error(R.drawable.avatar)
+        .placeholder(R.drawable.avatar_placeholder)
+        .error(R.drawable.ic_mentor)
         .apply {
             if (circleCrop) circleCrop()
         }

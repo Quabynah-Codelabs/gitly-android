@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_nav_dest_home_to_nav_dest_search"
             app:destination="@id/nav_dest_search" />
+        <action
+            android:id="@+id/action_nav_dest_home_to_nav_dest_user"
+            app:destination="@id/nav_dest_user" />
     </fragment>
     <fragment
         android:id="@id/nav_dest_welcome"
@@ -76,6 +79,22 @@
         <action
             android:id="@+id/action_nav_dest_register_to_nav_dest_auth"
             app:destination="@id/nav_dest_auth" />
+    </fragment>
+    <fragment
+        android:id="@id/nav_dest_user"
+        android:name="dev.gitly.view.user.UserFragment"
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user">
+        <argument
+            android:name="currentUser"
+            android:defaultValue="@null"
+            app:argType="dev.gitly.model.data.User"
+            app:nullable="true" />
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 

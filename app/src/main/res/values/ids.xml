@@ -7,4 +7,7 @@
     <item name="nav_dest_search" type="id" />
     <item name="nav_dest_account_setup" type="id" />
     <item name="nav_dest_register" type="id" />
+    <item name="nav_dest_user" type="id" />
+    <item name="nav_dest_chat" type="id" />
+    <item name="nav_dest_mentor" type="id" />
 </resources>

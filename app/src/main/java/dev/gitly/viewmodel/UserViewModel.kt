@@ -38,6 +38,8 @@ class UserViewModel @ViewModelInject constructor(
         ).flow.cachedIn(viewModelScope).also { currentUsersResult = it }
     }
 
+    fun getUserById(id: String): LiveData<User> = repository.getUserById(id)
+
     companion object {
         private const val USER_PAGE_SIZE = 5
     }
