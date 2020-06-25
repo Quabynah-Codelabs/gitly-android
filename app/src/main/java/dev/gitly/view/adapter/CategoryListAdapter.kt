@@ -46,7 +46,7 @@ class CategoryListAdapter constructor(private val categoryViewModel: CategoryVie
                             setCardBackgroundColor(
                                 ContextCompat.getColor(
                                     binding.root.context,
-                                    R.color.teal_200
+                                    R.color.secondary
                                 )
                             )
                             categoryName.setTextColor(
