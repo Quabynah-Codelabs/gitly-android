@@ -71,13 +71,13 @@ class HomeFragment : Fragment() {
                     KThemes.LIGHT -> setImageDrawable(
                         ContextCompat.getDrawable(
                             requireContext(),
-                            R.drawable.ic_twotone_toggle_night
+                            R.drawable.ic_moon
                         )
                     )
                     KThemes.DARK -> setImageDrawable(
                         ContextCompat.getDrawable(
                             requireContext(),
-                            R.drawable.ic_twotone_toggle_day
+                            R.drawable.ic_sun
                         )
                     )
                     KThemes.FOLLOW_SYSTEM -> setImageDrawable(

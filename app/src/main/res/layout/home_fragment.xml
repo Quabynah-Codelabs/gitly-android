@@ -44,7 +44,7 @@
                         android:layout_height="?actionBarSize"
                         android:background="?selectableItemBackground"
                         android:contentDescription="@string/search"
-                        android:src="@drawable/ic_twotone_search"
+                        android:src="@drawable/ic_search"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/theme_menu_item"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -57,7 +57,7 @@
                         android:layout_height="?actionBarSize"
                         android:background="?selectableItemBackground"
                         android:contentDescription="@string/toggle_theme"
-                        android:src="@drawable/ic_twotone_follow_system"
+                        android:src="@drawable/ic_moon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/more_menu_item"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -70,7 +70,7 @@
                         android:layout_height="?actionBarSize"
                         android:background="?selectableItemBackground"
                         android:contentDescription="@string/more"
-                        android:src="@drawable/ic_twotone_more"
+                        android:src="@drawable/ic_more_horizontal"
                         tools:visibility="visible"
                         android:visibility="@{userId == null ? View.GONE : View.VISIBLE, default=`gone`}"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,9 +133,9 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             tools:enabled="true"
-            android:contentDescription="@string/join_slack"
+            android:contentDescription="@string/compose_message"
             android:enabled="@{userId != null, default=`false`}"
-            android:src="@drawable/ic_twotone_group" />
+            android:src="@drawable/ic_edit" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

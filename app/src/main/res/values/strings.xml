@@ -16,6 +16,7 @@
     <string name="get_started">Explore</string>
     <string name="retry">Retry</string>
     <string name="join_slack">Join slack</string>
+    <string name="compose_message">Compose</string>
     <string name="popular">Popular</string>
     <string name="mentors">Mentors</string>
     <string name="search">Search</string>
