@@ -19,6 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
 import dev.gitly.databinding.FragmentUserBinding
+import dev.gitly.debugPrint
 import dev.gitly.debugger
 import dev.gitly.view.user.tabs.MentorBlogPostsFragment
 import dev.gitly.view.user.tabs.MentorExperienceFragment
@@ -47,6 +48,14 @@ class UserFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        arguments?.let {
+            "Argument=$arguments".debugPrint()
+
+            val id = it.getString("userId")
+            "id=$id".debugPrint()
+
+        }
 
         when {
             // get current user passed through arguments
@@ -82,14 +91,16 @@ class UserFragment : Fragment() {
             shareMentor.setOnClickListener {
                 ShareCompat.IntentBuilder.from(requireActivity())
                     .setChooserTitle("Share profile with...")
-                    .setSubject("Sharing profile information")
-                    .setType("text/*")
-                    .setText(currentUser?.name)
+                    .setSubject("Checkout my mentor on Gitly")
+                    .setType("*/*")
+                    .setText("${currentUser?.name} is my new mentor on Gitly(https://play.google.com/store/apps/details?id=dev.gitly)\n\nhttps://gitly.com/users?userId=${currentUser?.id}")
                     .setStream(Uri.parse(currentUser?.avatar))
                     .startChooser()
             }
             executePendingBindings()
         }
+
+
     }
 
     /**

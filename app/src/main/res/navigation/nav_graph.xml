@@ -85,6 +85,7 @@
         android:name="dev.gitly.view.user.UserFragment"
         android:label="User Profile"
         tools:layout="@layout/fragment_user">
+        <deepLink app:uri="https://gitly.com/users?userId={userId}" />
         <argument
             android:name="currentUser"
             android:defaultValue="@null"
