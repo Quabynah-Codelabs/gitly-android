@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.R
-import dev.gitly.core.billing.GitlyBillingService
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
 import dev.gitly.databinding.HomeFragmentBinding
+import dev.gitly.view.adapter.UsersAdapter
+import dev.gitly.viewmodel.UserViewModel
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,6 +32,9 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var authPrefs: AuthPrefs
 
+    private val userViewModel by viewModels<UserViewModel>()
+    private lateinit var usersAdapter: UsersAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,26 +46,36 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        // init adapter
+        usersAdapter = UsersAdapter { user ->
+            val actionNavDestHomeToNavDestUser =
+                HomeFragmentDirections.actionNavDestHomeToNavDestUser(
+                    currentUser = user,
+                    userId = user?.id
+                )
+            findNavController().navigate(actionNavDestHomeToNavDestUser)
+        }
+
         // setup binding
         binding.run {
             userId = authPrefs.userId
-
-            fab.setOnClickListener {
-                GitlyBillingService(requireActivity())
-            }
 
             moreMenuItem.setOnClickListener {
                 findNavController().navigate(
                     HomeFragmentDirections.actionNavDestHomeToNavDestUser(userId = authPrefs.userId)
                 )
             }
-            searchMenuItem.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search) }
+            searchContainer.setOnClickListener { findNavController().navigate(R.id.action_nav_dest_home_to_nav_dest_search) }
             themeMenuItem.setOnClickListener {
                 when (themePrefs.currentTheme) {
                     KThemes.LIGHT -> themePrefs.updateTheme(KThemes.DARK)
                     KThemes.DARK -> themePrefs.updateTheme(KThemes.LIGHT)
                     KThemes.FOLLOW_SYSTEM -> themePrefs.updateTheme(KThemes.DARK)
                 }
+            }
+
+            homeMentorList.run {
+                adapter = usersAdapter
             }
             executePendingBindings()
         }
@@ -90,6 +107,16 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+
+        lifecycleScope.launchWhenStarted {
+            // Load all mentors
+            userViewModel.getUsersStream().collectLatest { usersPagingData ->
+                usersAdapter.submitData(usersPagingData)
+            }
+
+            // Load all blog posts
+            // TODO: Load all blog posts here
+        }
 
     }
 

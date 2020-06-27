@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.gitly.BuildConfig
 import dev.gitly.R
+import dev.gitly.core.billing.GitlyBillingService
 import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.util.HtmlUtils
 import dev.gitly.databinding.WelcomeFragmentBinding
@@ -37,6 +38,9 @@ class WelcomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val gitlyBillingService = GitlyBillingService(requireActivity())
+        // gitlyBillingService.buy()
 
         // setup binding
         binding.run {

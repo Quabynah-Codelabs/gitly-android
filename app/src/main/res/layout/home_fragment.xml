@@ -18,6 +18,7 @@
         android:layout_height="match_parent"
         tools:context=".view.home.HomeFragment">
 
+        <!-- Appbar. -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -31,25 +32,13 @@
                 app:contentScrim="?colorPrimary"
                 app:layout_scrollFlags="snap|exitUntilCollapsed">
 
+                <!-- Toolbar. -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/toolbar_container"
                     android:layout_width="wrap_content"
                     android:layout_height="?actionBarSize"
                     android:layout_gravity="top|end"
                     app:layout_collapseMode="pin">
-
-                    <ImageButton
-                        android:id="@+id/search_menu_item"
-                        android:layout_width="?actionBarSize"
-                        android:layout_height="?actionBarSize"
-                        android:background="?selectableItemBackground"
-                        android:contentDescription="@string/search"
-                        android:src="@drawable/ic_search"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/theme_menu_item"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
                         android:id="@+id/theme_menu_item"
@@ -61,7 +50,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/more_menu_item"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/search_menu_item"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
@@ -71,16 +60,17 @@
                         android:background="?selectableItemBackground"
                         android:contentDescription="@string/more"
                         android:src="@drawable/ic_more_horizontal"
-                        tools:visibility="visible"
                         android:visibility="@{userId == null ? View.GONE : View.VISIBLE, default=`gone`}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/theme_menu_item"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <!-- Content. -->
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -109,6 +99,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!-- Page content. -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_container"
             android:layout_width="match_parent"
@@ -118,24 +109,130 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge">
 
-                <!-- todo: add content here -->
+                <!-- Search. -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/search_container"
+                    android:layout_width="0dp"
+                    android:layout_height="?actionBarSize"
+                    android:background="@drawable/search_background"
+                    android:foreground="?selectableItemBackground"
+                    app:layout_constraintEnd_toStartOf="@id/right_guideline"
+                    app:layout_constraintStart_toEndOf="@id/left_guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/search_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/search"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_search"
+                        android:tint="?colorControlNormal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:alpha="?emphasisMid"
+                        android:text="@string/search_hint"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/search_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/left_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.08" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/right_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.92" />
+
+                <!-- Mentors list. -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_mentor_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/spacing_large"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/left_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/search_container"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_mentor_card" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/blog_posts_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_xlarge"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                    app:layout_constraintStart_toEndOf="@id/left_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/home_mentor_list">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="?emphasisLow"
+                        android:text="@string/recent"
+                        android:textAppearance="?textAppearanceHeadline5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="?emphasisHigh"
+                        android:text="@string/blog"
+                        android:textAppearance="?textAppearanceHeadline4" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!-- Blog posts list. -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_blog_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/spacing_large"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/right_guideline"
+                    app:layout_constraintStart_toEndOf="@id/left_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/blog_posts_title"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_blog_card" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            tools:enabled="true"
-            android:contentDescription="@string/compose_message"
-            android:enabled="@{userId != null, default=`false`}"
-            android:src="@drawable/ic_edit" />
+        <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+             android:id="@+id/fab"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom|end"
+             android:layout_margin="@dimen/fab_margin"
+             android:contentDescription="@string/compose_message"
+             android:enabled="@{userId != null, default=`false`}"
+             android:src="@drawable/ic_users"
+             tools:enabled="true" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

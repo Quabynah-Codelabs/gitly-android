@@ -1,0 +1,41 @@
+{
+  "comment": "Sample blog posts for testing",
+  "posts": [
+    {
+      "_id": "flutter",
+      "name": "Flutter",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "_id": "web",
+      "name": "Web",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "_id": "android",
+      "name": "Android",
+      "icon": "",
+      "isEnabled": true
+    },
+    {
+      "_id": "machine_learning",
+      "name": "Machine Learning",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "_id": "ios",
+      "name": "iOS",
+      "icon": "",
+      "isEnabled": false
+    },
+    {
+      "_id": "ui_ux_designer",
+      "name": "UI/UX Designer",
+      "icon": "",
+      "isEnabled": false
+    }
+  ]
+}

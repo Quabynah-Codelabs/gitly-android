@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 class GitlyBillingService constructor(private val context: Activity) {
 
-    private val skuType = BillingClient.SkuType.INAPP
+    private val skuType = BillingClient.SkuType.SUBS
     private var skuDetails = mutableListOf<SkuDetails>()
     private var purchaseHistoryRecordList = mutableListOf<PurchaseHistoryRecord>()
     private val purchaseUpdateListener =
@@ -39,7 +39,12 @@ class GitlyBillingService constructor(private val context: Activity) {
         .build()
 
     private suspend fun queryPurchaseHistory() {
-        if (!billingClient.isReady) return
+        if (!billingClient.isReady) {
+            debugger("Billing client is not ready")
+            return
+        }
+
+        debugger("Starting billing client")
 
         val queryPurchaseHistory =
             withContext(Dispatchers.IO) { billingClient.queryPurchaseHistory(skuType) }
@@ -56,6 +61,7 @@ class GitlyBillingService constructor(private val context: Activity) {
         if (!billingClient.isReady) return
 
         val skuList = ArrayList<String>()
+        skuList.add("android.test.purchased")
         skuList.add("premium_upgrade")
         val params = SkuDetailsParams.newBuilder()
             .setSkusList(skuList)
@@ -89,7 +95,8 @@ class GitlyBillingService constructor(private val context: Activity) {
                         .build()
                     val responseCode = billingClient.launchBillingFlow(context, flowParams)
                     responseCode.debugMessage.debugPrint()
-                }
+                } else
+                    debugger(billingResult.debugMessage)
             }
 
             override fun onBillingServiceDisconnected() {
@@ -97,6 +104,17 @@ class GitlyBillingService constructor(private val context: Activity) {
                 // Google Play by calling the startConnection() method.
             }
         })
+    }
+
+    fun buy() {
+        try {
+            val flowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(skuDetails.first())
+                .build()
+            billingClient.launchBillingFlow(context, flowParams)
+        } catch (e: Exception) {
+            e.localizedMessage.debugPrint()
+        }
     }
 
 }

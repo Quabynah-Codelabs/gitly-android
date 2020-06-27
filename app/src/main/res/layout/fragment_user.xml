@@ -19,8 +19,9 @@
 
         <ImageView
             android:id="@+id/user_avatar"
-            android:layout_width="@dimen/large_avatar_size"
-            android:layout_height="@dimen/large_avatar_size"
+            android:layout_width="@dimen/xlarge_avatar_size"
+            android:layout_height="@dimen/xlarge_avatar_size"
+            android:transitionName="@{currentUser.id}"
             android:contentDescription="@{currentUser.id}"
             android:scaleType="centerCrop"
             tools:src="@drawable/ic_mentor"

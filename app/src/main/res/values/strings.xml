@@ -45,4 +45,6 @@
     <string name="experience_none">I\'d rather not say</string>
     <string name="expert">Expert</string>
     <string name="logout">Logout</string>
+    <string name="recent">Recent</string>
+    <string name="blog">Blog posts</string>
 </resources>

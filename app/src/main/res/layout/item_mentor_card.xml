@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="dev.gitly.model.data.User" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="mentor"
+            type="User" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mentor_card"
+        android:layout_width="@dimen/mentor_card_width"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:minHeight="@dimen/mentor_card_width"
+        app:contentPadding="@dimen/spacing_large">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Avatar. -->
+            <ImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="@dimen/large_avatar_size"
+                android:layout_height="@dimen/large_avatar_size"
+                android:contentDescription="@{mentor.name}"
+                android:transitionName="@{mentor.id}"
+                app:circleCrop="@{true}"
+                app:url="@{mentor.avatar}"
+                tools:src="@drawable/ic_mentor" />
+
+            <!-- Username. -->
+            <TextView
+                android:id="@+id/mentor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{mentor.name}"
+                android:textAppearance="?textAppearanceHeadline6"
+                tools:text="@sample/users.json/users/name" />
+
+            <!-- Designation. -->
+            <TextView
+                android:id="@+id/mentor_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:gravity="center"
+                android:text="@{mentor.designation}"
+                android:textAppearance="?textAppearanceSubtitle2"
+                tools:text="@sample/users.json/users/designation" />
+
+            <TextView
+                android:id="@+id/mentor_followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:textAppearance="?textAppearanceOverline"
+                tools:text="23.4K Followers" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

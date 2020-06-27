@@ -31,14 +31,14 @@ class ThemePrefs @Inject constructor(context: Context) {
     // Get the current theme
     val currentTheme: KThemes
         get() = KThemes.valueOf(
-            prefs.getString("key.theme.prefs", KThemes.FOLLOW_SYSTEM.name)
-                ?: KThemes.FOLLOW_SYSTEM.name
+            prefs.getString("key.theme.prefs", KThemes.DARK.name)
+                ?: KThemes.DARK.name
         )
 
     init {
         _liveTheme.value = KThemes.valueOf(
-            prefs.getString("key.theme.prefs", KThemes.FOLLOW_SYSTEM.name)
-                ?: KThemes.FOLLOW_SYSTEM.name
+            prefs.getString("key.theme.prefs", KThemes.DARK.name)
+                ?: KThemes.DARK.name
         )
     }
 

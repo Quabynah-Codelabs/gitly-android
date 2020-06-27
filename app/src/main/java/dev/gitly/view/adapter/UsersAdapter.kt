@@ -9,8 +9,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.gitly.R
+import dev.gitly.databinding.ItemMentorCardBinding
 import dev.gitly.databinding.LoadingStateFooterBinding
-import dev.gitly.databinding.UserItemBinding
+import dev.gitly.debugPrint
 import dev.gitly.model.data.User
 
 /**
@@ -36,7 +37,8 @@ class UserLoadStateAdapter(private val retry: () -> Unit) :
 /**
  * User Adapter
  */
-class UsersAdapter : PagingDataAdapter<User, UsersAdapter.UserViewHolder>(USER_COMPARATOR) {
+class UsersAdapter constructor(private val onTap: (user: User?) -> Unit) :
+    PagingDataAdapter<User, UsersAdapter.UserViewHolder>(USER_COMPARATOR) {
     companion object {
         private val USER_COMPARATOR: DiffUtil.ItemCallback<User> =
             object : DiffUtil.ItemCallback<User>() {
@@ -49,11 +51,12 @@ class UsersAdapter : PagingDataAdapter<User, UsersAdapter.UserViewHolder>(USER_C
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val user = getItem(position)
+        holder.bind(user)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
-        UserViewHolder.create(parent)
+        UserViewHolder.create(parent, onTap)
 
     class UsersLoadingStateViewHolder(
         private val binding: LoadingStateFooterBinding,
@@ -87,22 +90,24 @@ class UsersAdapter : PagingDataAdapter<User, UsersAdapter.UserViewHolder>(USER_C
     }
 
     class UserViewHolder(
-        private val binding: UserItemBinding
+        private val binding: ItemMentorCardBinding,
+        private val onTap: (user: User?) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currentUser: User?) {
             binding.run {
-                user = currentUser
+                mentor = currentUser
+                root.setOnClickListener { onTap(currentUser)}
                 executePendingBindings()
             }
         }
 
         companion object {
-            fun create(parent: ViewGroup): UserViewHolder {
+            fun create(parent: ViewGroup, onTap: (user: User?) -> Unit): UserViewHolder {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.user_item, parent, false)
-                val binding = UserItemBinding.bind(view)
-                return UserViewHolder(binding)
+                    .inflate(R.layout.item_mentor_card, parent, false)
+                val binding = ItemMentorCardBinding.bind(view)
+                return UserViewHolder(binding, onTap)
             }
         }
     }

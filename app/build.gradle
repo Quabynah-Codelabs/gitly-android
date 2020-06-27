@@ -41,6 +41,7 @@ android {
 
         // Field for all builds
         buildConfigField "String", "GUEST_TOKEN", "\"$guest_access_token\""
+        buildConfigField "String", "RSA_KEY", "\"$licensing_rsa_key\""
         resValue "string", "maps_api_key", (secureProps.getProperty("maps_api_key") ?: "")
 
         javaCompileOptions {
@@ -76,6 +77,7 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
+            debuggable true
             buildConfigField "String", "BASE_URL", "\"$live_base_url\""
         }
     }

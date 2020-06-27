@@ -8,6 +8,7 @@
     <color name="black">#FF010101</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#FF8F8F8F</color>
+    <color name="background_light">#eeeeee</color>
 
     <!-- indicator. -->
     <color name="page_indicator_dark">#80c5bfbc</color>

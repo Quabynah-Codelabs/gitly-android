@@ -16,6 +16,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:colorBackground">@color/background_light</item>
         <!-- Shapes. -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Gitly.Small</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Gitly.Medium</item>
