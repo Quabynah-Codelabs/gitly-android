@@ -11,6 +11,6 @@
     <corners android:radius="@dimen/spacing_large" />
     <stroke
         android:width="2dp"
-        android:color="?currentPageIndicatorColor" />
+        android:color="?pageIndicatorColor" />
 
 </shape>
