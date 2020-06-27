@@ -1,10 +1,12 @@
 package dev.gitly.view.user
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -77,9 +79,17 @@ class UserFragment : Fragment() {
                 tab.text = pageTitles[position]
             }.attach()
             userPager.setPageTransformer(DepthTransformation())
+            shareMentor.setOnClickListener {
+                ShareCompat.IntentBuilder.from(requireActivity())
+                    .setChooserTitle("Share profile with...")
+                    .setSubject("Sharing profile information")
+                    .setType("text/*")
+                    .setText(currentUser?.name)
+                    .setStream(Uri.parse(currentUser?.avatar))
+                    .startChooser()
+            }
             executePendingBindings()
         }
-
     }
 
     /**
