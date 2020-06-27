@@ -1,91 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-package="dev.gitly"
-android:installLocation="auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="dev.gitly"
+    android:installLocation="auto">
 
-<!-- Permissions. -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="com.android.vending.BILLING" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Permissions. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-<application
-    android:name="dev.gitly.GitlyApp"
-    android:allowBackup="true"
-    android:fullBackupContent="@xml/backup_descriptor"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:networkSecurityConfig="@xml/network_config"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.Gitly"
-    android:usesCleartextTraffic="true"
-    tools:ignore="UnusedAttribute">
-    <activity
-        android:name=".view.MainActivity"
-        android:configChanges="screenLayout|screenSize|orientation"
-        android:description="@string/login_header"
+    <application
+        android:name="dev.gitly.GitlyApp"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:logo="@drawable/logo"
-        android:resizeableActivity="true"
-        android:screenOrientation="portrait"
-        android:supportsPictureInPicture="true"
-        android:visibleToInstantApps="true"
-        android:windowSoftInputMode="adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        android:networkSecurityConfig="@xml/network_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Gitly"
+        android:usesCleartextTraffic="true"
+        tools:ignore="UnusedAttribute">
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="screenLayout|screenSize|orientation"
+            android:description="@string/login_header"
+            android:label="@string/app_name"
+            android:logo="@drawable/logo"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:visibleToInstantApps="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <!-- Include the host attribute if you want your app to respond
-                     only to URLs with your app's domain. -->
-            <data
-                android:host="callback"
-                android:scheme="gitly" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <!-- Include the host attribute if you want your app to respond
-                     only to URLs with your app's domain. -->
-            <data
-                android:host="gitly"
-                android:path="/"
-                android:scheme="https" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Include the host attribute if you want your app to respond
+                         only to URLs with your app's domain. -->
+                <data
+                    android:host="callback"
+                    android:scheme="gitly" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
 
-        <nav-graph android:value="@navigation/nav_graph" />
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Include the host attribute if you want your app to respond
+                         only to URLs with your app's domain. -->
+                <data
+                    android:host="gitly-mobile.web.app"
+                    android:path="/"
+                    android:scheme="https" />
 
-    <provider
-        android:name="androidx.work.impl.WorkManagerInitializer"
-        android:authorities="${applicationId}.workmanager-init"
-        android:exported="false"
-        tools:node="remove" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
 
-    <meta-data
-        android:name="preloaded_fonts"
-        android:resource="@array/preloaded_fonts" />
+            <!-- filter for sending text or images; accepts SEND action and text or image data -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
 
-    <meta-data
-        android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="@string/google_maps_key" />
-</application>
+            <nav-graph android:value="@navigation/nav_graph" />
+        </activity>
+
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false"
+            tools:node="remove" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+    </application>
 
 </manifest>

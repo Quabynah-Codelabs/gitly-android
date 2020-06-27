@@ -10,33 +10,33 @@ import retrofit2.http.*
 interface WebService {
 
     @Headers("Accept: application/json")
-    @POST("/oauth")
+    @POST("/gitly/oauth")
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): AccessToken
 
     @Headers("Accept: application/json")
-    @POST("/api/users")
+    @POST("/gitly/users")
     suspend fun signUp(
         @Body registerRequest: RegisterRequest
     ): User
 
     @Headers("Accept: application/json")
-    @GET("/api/users/me")
+    @GET("/gitly/users/me")
     suspend fun getCurrentUser(): User?
 
     @Headers("Accept: application/json")
-    @GET("/api/users/{id}")
+    @GET("/gitly/users/{id}")
     suspend fun getUserById(@Path("id") id: String): User?
 
     @Headers("Accept: application/json")
-    @PUT("/api/users/me")
+    @PUT("/gitly/users/me")
     suspend fun updateUserAsync(@Body user: User): User
 
-    @DELETE("/api/users/{id}")
+    @DELETE("/gitly/users/{id}")
     suspend fun deleteUser(@Path("id") userId: String?)
 
-    @POST("/api/users/mentors")
+    @POST("/gitly/users/mentors")
     suspend fun requestMentors(
         @Body request: PagingRequest
     ): List<User>

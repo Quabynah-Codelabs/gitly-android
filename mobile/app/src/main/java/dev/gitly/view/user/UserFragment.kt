@@ -84,7 +84,7 @@ class UserFragment : Fragment() {
                     .setChooserTitle("Share profile with...")
                     .setSubject("Checkout my mentor on Gitly")
                     .setType("*/*")
-                    .setText("${currentUser?.name} is my new mentor on Gitly(https://play.google.com/store/apps/details?id=dev.gitly)\n\nhttps://gitly.com/users?userId=${currentUser?.id}")
+                    .setText("${currentUser?.name} is my new mentor on Gitly(https://play.google.com/store/apps/details?id=dev.gitly)\n\nhttps://gitly-mobile.web.app/users?userId=${currentUser?.id}")
                     .setStream(Uri.parse(currentUser?.avatar))
                     .startChooser()
             }

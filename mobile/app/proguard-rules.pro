@@ -1,3 +1,6 @@
+# You can specify any path and filename.
+-printconfiguration ~/tmp/full-r8-config.txt
+
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
  <init>(...);
