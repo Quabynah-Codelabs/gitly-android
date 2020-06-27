@@ -78,7 +78,6 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
-            debuggable true
             buildConfigField "String", "BASE_URL", "\"$live_base_url\""
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
