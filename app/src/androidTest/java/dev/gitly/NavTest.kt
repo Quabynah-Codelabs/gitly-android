@@ -1,41 +1,45 @@
 package dev.gitly
 
-import android.net.Uri
-import androidx.navigation.NavDeepLink
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
-import org.junit.Assert.assertTrue
+import androidx.navigation.testing.TestNavHostController
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import dev.gitly.view.welcome.WelcomeFragment
+import org.hamcrest.core.IsEqual
 import org.junit.Test
 import org.junit.runner.RunWith
 
-//@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4::class)
 class NavTest {
-//    @Test
-//    fun test() {
-//        val navDeepLink = NavDeepLink("scheme://host/path\\?query1={query_value1}&query2={query_value2}")
-//        val deepLink = Uri.parse("scheme://host/path?query1=foo_bar&query2=baz")
-//
-//        val bundle = navDeepLink.getMatchingArguments(deepLink)!!
-//        assertTrue(bundle.get("query_value1") == "foo_bar")
-//        assertTrue(bundle.get("query_value2") == "baz")
-//    }
 
     @Test
     fun testNavigationToInGameScreen() {
         // Create a TestNavHostController
-//        val navController = TestNavHostController(
-//            ApplicationProvider.getApplicationContext())
-//        navController.setGraph(R.navigation.trivia)
+        val navController = TestNavHostController(
+            ApplicationProvider.getApplicationContext()
+        )
+        navController.setGraph(R.navigation.nav_graph)
 
-        // Create a graphical FragmentScenario for the TitleScreen
-//        val titleScenario = launchFragmentInContainer<TitleScreen>()
+        // Create a graphical FragmentScenario for the Welcome screen
+        val welcomeScenario = launchFragmentInContainer<WelcomeFragment>()
 
         // Set the NavController property on the fragment
-//        titleScenario.onFragment { fragment ->
-//            Navigation.setViewNavController(fragment.requireView(), navController)
-//        }
+        welcomeScenario.onFragment { fragment ->
+            Navigation.setViewNavController(fragment.requireView(), navController)
+            fragment.parentFragmentManager.executePendingTransactions()
+        }
 
         // Verify that performing a click changes the NavController’s state
-//        onView(ViewMatchers.withId(R.id.play_btn)).perform(ViewActions.click())
-//        assertThat(navController.currentDestination?.id).isEqualTo(R.id.in_game)
+        onView(withId(R.id.guest_mode)).perform(click())
+        assertThat(
+            "Nav destination is home page",
+            navController.currentDestination?.id,
+            IsEqual(R.id.nav_dest_home)
+        )
     }
 }

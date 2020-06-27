@@ -1,6 +1,6 @@
 package dev.gitly
 
-class SlackAPITest {
 
+class SlackAPITest {
 
 }
