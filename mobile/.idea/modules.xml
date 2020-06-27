@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Gitly.iml" filepath="$PROJECT_DIR$/.idea/modules/Gitly.iml" group="Gitly" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Gitly/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bypass/bypass.iml" filepath="$PROJECT_DIR$/.idea/modules/bypass/bypass.iml" group="Gitly/bypass" />
+    </modules>
+  </component>
+</project>
