@@ -30,6 +30,34 @@
 -dontwarn in.uncod.android.bypass.**
 
 -keep class dev.gitly.** { *; }
+-keep class dev.gitly.core.billing.** { *; }
+-keep class dev.gitly.core.prefs.** { *; }
+-keep class dev.gitly.core.util.** { *; }
+-keep class dev.gitly.core.worker.** { *; }
+-keep class dev.gitly.model.** { *; }
+-keep class dev.gitly.model.data.** { *; }
+-keep class dev.gitly.model.repositories.** { *; }
+-keep class dev.gitly.model.sources.local.** { *; }
+-keep class dev.gitly.model.sources.local.daos.** { *; }
+-keep class dev.gitly.model.sources.local.database.** { *; }
+-keep class dev.gitly.model.sources.remote.** { *; }
+-keep class dev.gitly.model.sources.remote.service.** { *; }
+-keep class dev.gitly.view.** { *; }
+-keep class dev.gitly.view.adapter.** { *; }
+-keep class dev.gitly.view.auth.** { *; }
+-keep class dev.gitly.view.home.** { *; }
+-keep class dev.gitly.view.map.** { *; }
+-keep class dev.gitly.view.search.** { *; }
+-keep class dev.gitly.view.source.** { *; }
+-keep class dev.gitly.view.user.** { *; }
+-keep class dev.gitly.view.welcome.** { *; }
+-keep class dev.gitly.view.widget.** { *; }
+-keep class dev.gitly.view.widget.util.** { *; }
+-keep class dev.gitly.view.widget.util.compat.** { *; }
+-keep class dev.gitly.viewmodel.** { *; }
+-keep class dev.gitly.** { *; }
+-keep class dev.gitly.** { *; }
+-keep class androidx.fragment.app.** { *; }
 -keep class in.uncod.android.bypass.** { *; }
 
 -keep class androidx.drawerlayout.widget.DrawerLayout { *; }
@@ -37,12 +65,6 @@
 # Proguard rules that are applied to your test apk/code.
 -ignorewarnings
 
-# Support Library
--dontwarn android.support.v4.**
--keep class android.support.v4.** { *; }
-
--dontwarn android.support.v7.**
--keep class android.support.v7.** { *; }
 -keep class androidx.appcompat.widget.** { *; }
 
 # AndroidX

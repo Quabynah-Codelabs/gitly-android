@@ -75,8 +75,8 @@ android {
         }
         release {
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             debuggable true
             buildConfigField "String", "BASE_URL", "\"$live_base_url\""
         }

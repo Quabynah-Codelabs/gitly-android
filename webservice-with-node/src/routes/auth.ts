@@ -40,6 +40,7 @@ router.post(
     return res.header("x-auth-token", token).send({
       access_token: token,
       token_type: user.isAdmin ? "admin" : "basic",
+      user
     });
   })
 );

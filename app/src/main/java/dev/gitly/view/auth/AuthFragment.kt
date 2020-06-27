@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +18,7 @@ import dev.gitly.databinding.AuthFragmentBinding
 import dev.gitly.debugger
 import dev.gitly.viewmodel.AuthState
 import dev.gitly.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -61,7 +63,12 @@ class AuthFragment : Fragment() {
                 }
 
                 AuthState.AUTHENTICATED -> { // do nothing
-
+                    lifecycleScope.launch {
+                        snackbar.run {
+                            setText("Fetching user data...")
+                            show()
+                        }
+                    }
                 }
 
                 AuthState.ERROR -> snackbar.run {
