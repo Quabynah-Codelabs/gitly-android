@@ -30,29 +30,40 @@ object NetworkModule {
     @Retention(AnnotationRetention.RUNTIME)
     annotation class AuthorizedOkHttpClient
 
+    //@Provides
+    //fun provideContext(app: GitlyApp): Context = app.applicationContext
+
     @NetworkModule.AuthorizedOkHttpClient
     @Provides
     fun provideAuthorizedOkHttpClient(
+        // context: Context,
         loggingInterceptor: HttpLoggingInterceptor,
         gitlyInterceptor: GitlyInterceptor
-    ): OkHttpClient =
-        OkHttpClient.Builder().apply {
+    ): OkHttpClient {
+        // val cache = Cache(File(context.cacheDir, "http-cache"), 10 * 1024 * 1024)
+        return OkHttpClient.Builder().apply {
             addInterceptor(loggingInterceptor)
+            //  cache(cache)
             addInterceptor(gitlyInterceptor)
             callTimeout(30L, TimeUnit.SECONDS)
             connectTimeout(60L, TimeUnit.SECONDS)
         }.build()
+    }
 
     @NetworkModule.OAuthOkHttpClient
     @Provides
     fun provideOAuthOkHttpClient(
+        // context: Context,
         loggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient =
-        OkHttpClient.Builder().apply {
+    ): OkHttpClient {
+        // val cache = Cache(File(context.cacheDir, "http-cache"), 10 * 1024 * 1024)
+        return OkHttpClient.Builder().apply {
             addInterceptor(loggingInterceptor)
+            // cache(cache)
             callTimeout(30L, TimeUnit.SECONDS)
             connectTimeout(60L, TimeUnit.SECONDS)
         }.build()
+    }
 
     @Provides
     fun provideGitlyInterceptor(authPrefs: AuthPrefs): GitlyInterceptor =

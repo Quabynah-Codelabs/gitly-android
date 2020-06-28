@@ -4,6 +4,8 @@ import androidx.paging.PagingSource
 import dev.gitly.debugger
 import dev.gitly.model.data.User
 import dev.gitly.model.repositories.UserRepository
+import retrofit2.HttpException
+import java.io.IOException
 
 /**
  * [PagingSource] for [User]s
@@ -15,13 +17,20 @@ class UserPagingSource(private val repository: UserRepository, private val pageS
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
-        val position = params.key ?: GITLY_PAGING_INDEX
-        debugger("Starting page -> $position")
-        val users = repository.getUsers(pageIndex = params.key ?: GITLY_PAGING_INDEX, pageSize = pageSize)
-        return LoadResult.Page(
-            data = users,
-            nextKey = if (users.isEmpty()) null else position + 1,
-            prevKey = if (position == GITLY_PAGING_INDEX) null else position - 1
-        )
+        return try {
+            val position = params.key ?: GITLY_PAGING_INDEX
+            val users = repository.getUsers(pageIndex = position, pageSize = pageSize)
+            LoadResult.Page(
+                data = users,
+                prevKey = null,
+                nextKey = if (position == GITLY_PAGING_INDEX) null else position - 1
+            )
+        } catch (e: IOException) {
+            // IOException for network failures.
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            // HttpException for any non-2xx HTTP status codes.
+            LoadResult.Error(e)
+        }
     }
 }

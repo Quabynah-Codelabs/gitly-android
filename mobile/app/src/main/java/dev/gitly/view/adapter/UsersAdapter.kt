@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.gitly.R
 import dev.gitly.databinding.ItemMentorCardBinding
 import dev.gitly.databinding.LoadingStateFooterBinding
-import dev.gitly.debugPrint
 import dev.gitly.model.data.User
 
 /**
@@ -46,7 +45,7 @@ class UsersAdapter constructor(private val onTap: (user: User?) -> Unit) :
                     oldItem.id == newItem.id
 
                 override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
-                    oldItem.id == newItem.id
+                    oldItem == newItem
             }
     }
 
@@ -97,7 +96,7 @@ class UsersAdapter constructor(private val onTap: (user: User?) -> Unit) :
         fun bind(currentUser: User?) {
             binding.run {
                 mentor = currentUser
-                root.setOnClickListener { onTap(currentUser)}
+                root.setOnClickListener { onTap(currentUser) }
                 executePendingBindings()
             }
         }

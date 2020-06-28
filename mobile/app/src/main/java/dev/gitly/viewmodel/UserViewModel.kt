@@ -41,6 +41,6 @@ class UserViewModel @ViewModelInject constructor(
     fun getUserById(id: String): LiveData<User> = repository.getUserById(id)
 
     companion object {
-        private const val USER_PAGE_SIZE = 5
+        private const val USER_PAGE_SIZE = 10
     }
 }

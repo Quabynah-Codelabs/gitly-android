@@ -19,7 +19,7 @@ import javax.inject.Inject
  * [Application] entry point
  */
 @HiltAndroidApp
-class GitlyApp : Application(), Configuration.Provider {
+class GitlyApp @Inject constructor() : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: HiltWorkerFactory

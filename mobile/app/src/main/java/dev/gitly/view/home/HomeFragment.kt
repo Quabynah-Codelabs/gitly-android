@@ -16,9 +16,12 @@ import dev.gitly.core.prefs.AuthPrefs
 import dev.gitly.core.prefs.KThemes
 import dev.gitly.core.prefs.ThemePrefs
 import dev.gitly.databinding.HomeFragmentBinding
+import dev.gitly.debugPrint
+import dev.gitly.view.adapter.UserLoadStateAdapter
 import dev.gitly.view.adapter.UsersAdapter
 import dev.gitly.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,6 +57,28 @@ class HomeFragment : Fragment() {
                     userId = user?.id
                 )
             findNavController().navigate(actionNavDestHomeToNavDestUser)
+        }
+
+        // apply header & footer
+        usersAdapter.apply {
+            withLoadStateHeaderAndFooter(
+                header = UserLoadStateAdapter(usersAdapter::retry),
+                footer = UserLoadStateAdapter(usersAdapter::retry)
+            )
+        }
+
+        lifecycleScope.launch {
+
+            // Observe load state
+            usersAdapter.loadStateFlow.collectLatest { state -> state.refresh.debugPrint() }
+
+            // Load all mentors
+            userViewModel.getUsersStream().collectLatest { usersPagingData ->
+                usersAdapter.submitData(usersPagingData)
+            }
+
+            // Load all blog posts
+            // TODO: Load all blog posts here
         }
 
         // setup binding
@@ -107,16 +132,6 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-
-        lifecycleScope.launchWhenStarted {
-            // Load all mentors
-            userViewModel.getUsersStream().collectLatest { usersPagingData ->
-                usersAdapter.submitData(usersPagingData)
-            }
-
-            // Load all blog posts
-            // TODO: Load all blog posts here
-        }
 
     }
 
