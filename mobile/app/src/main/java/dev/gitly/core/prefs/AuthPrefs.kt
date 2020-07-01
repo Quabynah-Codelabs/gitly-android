@@ -12,22 +12,27 @@ import javax.inject.Inject
  * [SharedPreferences] implementation for authentication
  */
 class AuthPrefs @Inject constructor(context: Context) {
-    private val prefs by lazy { context.getSharedPreferences("gitly.prefs", Context.MODE_PRIVATE) }
+    private val prefs by lazy {
+        context.getSharedPreferences(
+            SharedPreferencesUtil.PREFS_AUTH,
+            Context.MODE_PRIVATE
+        )
+    }
 
     // live token listener
     private val _liveUserId = MutableLiveData<String?>()
     val refreshedUserId: LiveData<String?> get() = _liveUserId
 
     init {
-        _liveUserId.postValue(prefs?.getString("id", null))
+        _liveUserId.postValue(prefs?.getString(SharedPreferencesUtil.KEY_USER_ID, null))
     }
 
     // Access token for user
     var token: String? = null
-        get() = prefs.getString("token", null)
+        get() = prefs.getString(SharedPreferencesUtil.KEY_ACCESS_TOKEN, null)
         set(value) {
             prefs.edit {
-                putString("token", value)
+                putString(SharedPreferencesUtil.KEY_ACCESS_TOKEN, value)
                 apply()
             }
             field = value
@@ -35,10 +40,10 @@ class AuthPrefs @Inject constructor(context: Context) {
 
     // User id
     var userId: String? = null
-        get() = prefs.getString("id", null)
+        get() = prefs.getString(SharedPreferencesUtil.KEY_USER_ID, null)
         set(value) {
             prefs.edit {
-                putString("id", value)
+                putString(SharedPreferencesUtil.KEY_USER_ID, value)
                 apply()
             }
             _liveUserId.postValue(value)

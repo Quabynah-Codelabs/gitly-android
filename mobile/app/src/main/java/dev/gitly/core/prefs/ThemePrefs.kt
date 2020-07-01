@@ -19,7 +19,7 @@ enum class KThemes {
 class ThemePrefs @Inject constructor(context: Context) {
     private val prefs by lazy {
         context.getSharedPreferences(
-            "theme.gitly.prefs",
+            SharedPreferencesUtil.PREFS_THEME,
             Context.MODE_PRIVATE
         )
     }
@@ -31,13 +31,13 @@ class ThemePrefs @Inject constructor(context: Context) {
     // Get the current theme
     val currentTheme: KThemes
         get() = KThemes.valueOf(
-            prefs.getString("key.theme.prefs", KThemes.DARK.name)
+            prefs.getString(SharedPreferencesUtil.KEY_CURRENT_THEME, KThemes.DARK.name)
                 ?: KThemes.DARK.name
         )
 
     init {
         _liveTheme.value = KThemes.valueOf(
-            prefs.getString("key.theme.prefs", KThemes.DARK.name)
+            prefs.getString(SharedPreferencesUtil.KEY_CURRENT_THEME, KThemes.DARK.name)
                 ?: KThemes.DARK.name
         )
     }
@@ -64,7 +64,7 @@ class ThemePrefs @Inject constructor(context: Context) {
         }
 
         prefs.edit {
-            putString("key.theme.prefs", themeKey.name)
+            putString(SharedPreferencesUtil.KEY_CURRENT_THEME, themeKey.name)
             apply()
         }
         _liveTheme.postValue(themeKey)

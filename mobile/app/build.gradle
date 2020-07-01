@@ -115,17 +115,6 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
-    flavorDimensions 'free', 'paid'
-    productFlavors {
-        staging {
-            dimension 'free'
-        }
-
-        full {
-            dimension 'paid'
-            applicationIdSuffix '.pro'
-        }
-    }
 }
 
 dependencies {
