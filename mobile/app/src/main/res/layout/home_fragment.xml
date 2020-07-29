@@ -130,10 +130,10 @@
                         android:contentDescription="@string/search"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_search"
-                        android:tint="?colorControlNormal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+                    <!-- android:tint="?attr/colorControlNormal" -->
 
                     <TextView
                         android:layout_width="0dp"
