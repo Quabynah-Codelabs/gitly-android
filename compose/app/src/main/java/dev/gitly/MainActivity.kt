@@ -7,6 +7,7 @@ import androidx.ui.core.setContent
 import androidx.ui.foundation.Text
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
+import androidx.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
 import dev.gitly.ui.GitlyTheme
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             GitlyTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    Greeting(stringResource(id = R.string.app_name))
                 }
             }
         }
@@ -33,6 +34,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     GitlyTheme {
-        Greeting("Android")
+        Greeting(stringResource(id = R.string.app_name))
     }
 }
