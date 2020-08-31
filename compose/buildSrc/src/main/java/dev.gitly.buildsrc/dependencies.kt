@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.compose.jetchat.buildsrc
+package dev.gitly.buildsrc
 
 object Versions {
     const val ktlint = "0.37.0"
