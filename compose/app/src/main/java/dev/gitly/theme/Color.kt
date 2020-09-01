@@ -1,4 +1,4 @@
-package dev.gitly.ui
+package dev.gitly.theme
 
 import androidx.ui.graphics.Color
 

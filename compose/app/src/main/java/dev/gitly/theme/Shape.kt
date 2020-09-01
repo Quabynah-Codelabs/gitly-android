@@ -1,4 +1,4 @@
-package dev.gitly.ui
+package dev.gitly.theme
 
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.material.Shapes

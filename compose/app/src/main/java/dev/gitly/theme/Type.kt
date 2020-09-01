@@ -1,4 +1,4 @@
-package dev.gitly.ui
+package dev.gitly.theme
 
 import androidx.ui.material.Typography
 import androidx.ui.text.TextStyle

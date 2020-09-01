@@ -9,7 +9,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
 import androidx.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
-import dev.gitly.ui.GitlyTheme
+import dev.gitly.theme.GitlyTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
