@@ -2,12 +2,12 @@ package dev.gitly
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Text
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Surface
-import androidx.ui.res.stringResource
+import androidx.compose.foundation.Text
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
 import dev.gitly.theme.GitlyTheme
 
@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             GitlyTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting(stringResource(id = R.string.app_name))
-                }
+                Greeting(stringResource(id = R.string.app_name))
             }
         }
     }
